@@ -18,7 +18,7 @@ Install and import the package. Then just customize its parameters.
 dependencies:
   flutter:
     sdk: flutter
-  buttons_tabbar: ^0.1.0+1
+  buttons_tabbar: ^0.1.0+2
 ```
 
 ---
@@ -87,6 +87,7 @@ If you have any suggestion or problem, let me know and I'll try to improve or fi
 
 ## Versioning
 
+- v0.1.0+2 - 24 April 2020
 - v0.1.0+1 - 24 April 2020
 
 ## License
