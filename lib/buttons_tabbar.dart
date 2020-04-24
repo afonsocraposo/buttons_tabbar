@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 const double _kTabHeight = 46.0;
 const double _kTextAndIconTabHeight = 72.0;
 
-class ButtonTabBar extends StatefulWidget implements PreferredSizeWidget {
-  ButtonTabBar({
+class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
+  ButtonsTabBar({
     Key key,
     @required this.tabs,
     this.controller,
+    this.duration = 250,
     this.backgroundColor = Colors.blueAccent,
     this.unselectedBackgroundColor = Colors.grey,
-    this.duration = 250,
     this.labelStyle,
     this.unselectedLabelStyle,
     this.physics,
@@ -35,14 +35,14 @@ class ButtonTabBar extends StatefulWidget implements PreferredSizeWidget {
   /// will be used.
   final TabController controller;
 
+  /// The duration in milliseconds of the transition animation.
+  final int duration;
+
   /// The background [Color] of the button on its selected state.
   final Color backgroundColor;
 
   /// The background [Color] of the button on its unselected state.
   final Color unselectedBackgroundColor;
-
-  /// The duration in milliseconds of the transition animation.
-  final int duration;
 
   /// The [TextStyle] of the button's [Text] on its selected state. The color provided
   /// on the TextStyle will be used for the [Icon]'s color.
@@ -91,10 +91,10 @@ class ButtonTabBar extends StatefulWidget implements PreferredSizeWidget {
   }
 
   @override
-  _ButtonTabBarState createState() => _ButtonTabBarState();
+  _ButtonsTabBarState createState() => _ButtonsTabBarState();
 }
 
-class _ButtonTabBarState extends State<ButtonTabBar>
+class _ButtonsTabBarState extends State<ButtonsTabBar>
     with TickerProviderStateMixin {
   TabController _controller;
 
@@ -178,10 +178,10 @@ class _ButtonTabBarState extends State<ButtonTabBar>
             ? TextStyle.lerp(
                 _labelStyle, _unselectedLabelStyle, _animationController.value)
             : _unselectedLabelStyle));
-    return Padding(
+    return Container(
       key: _tabKeys[index],
       // padding for the buttons
-      padding: _buttonMargin,
+      margin: _buttonMargin,
       child: FlatButton(
         padding: _contentPadding,
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
