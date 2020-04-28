@@ -1,7 +1,7 @@
 # Buttons TabBar
 
 <p>
-  <img src="https://img.shields.io/badge/version-0.0.1%2B1-blue.svg" />
+  <img src="https://img.shields.io/badge/version-0.0.1%2B2-blue.svg" />
 </p>
 
 Open source Flutter package, tabbar where each tab indicator is a toggle button.
