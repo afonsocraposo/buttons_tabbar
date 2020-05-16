@@ -199,19 +199,21 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
         },
         child: Row(
           children: <Widget>[
-            IconTheme.merge(
-                data: IconThemeData(
-                    size: 24.0,
-                    color: index == _currentIndex
-                        ? _colorTweenForegroundActivate.value
-                        : (index == _prevIndex
-                            ? _colorTweenForegroundDeactivate.value
-                            : _unselectedForegroundColor)),
-                child: tab.icon),
+            tab.icon != null
+                ? IconTheme.merge(
+                    data: IconThemeData(
+                        size: 24.0,
+                        color: index == _currentIndex
+                            ? _colorTweenForegroundActivate.value
+                            : (index == _prevIndex
+                                ? _colorTweenForegroundDeactivate.value
+                                : _unselectedForegroundColor)),
+                    child: tab.icon)
+                : Container(),
             SizedBox(
-              width: tab.icon != null && tab.text != null
-                  ? widget.labelSpacing
-                  : 0,
+              width: tab.icon == null || tab.text == null
+                  ? 0
+                  : widget.labelSpacing,
             ),
             tab.text != null
                 ? Text(
