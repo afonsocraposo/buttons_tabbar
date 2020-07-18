@@ -6,7 +6,7 @@
 
 Open source Flutter package, tabbar where each tab indicator is a toggle button.
 
-Made by [Afonso Raposo](https://afonsocraposo.github.io/).
+Made by [Afonso Raposo](https://afonsoraposo.com).
 
 See the full example [here](https://github.com/Afonsocraposo/buttons_tabbar/tree/master/example/example.dart)
 
