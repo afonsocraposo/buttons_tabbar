@@ -1,12 +1,12 @@
 # Buttons TabBar
 
 <p>
-  <img src="https://img.shields.io/badge/version-0.1.1%2B1-blue.svg" />
+  <img src="https://img.shields.io/badge/version-0.1.2B1-blue.svg" />
 </p>
 
 Open source Flutter package, tabbar where each tab indicator is a toggle button.
 
-Made by [Afonso Raposo](https://afonsocraposo.github.io/).
+Made by [Afonso Raposo](https://afonsoraposo.com).
 
 See the full example [here](https://github.com/Afonsocraposo/buttons_tabbar/tree/master/example/example.dart)
 
@@ -18,7 +18,7 @@ Install and import the package. Then just customize its parameters.
 dependencies:
   flutter:
     sdk: flutter
-  buttons_tabbar: ^0.1.1+1
+  buttons_tabbar: ^0.1.2+1
 ```
 
 ---
@@ -88,6 +88,7 @@ If you have any suggestion or problem, let me know and I'll try to improve or fi
 
 ## Versioning
 
+- v0.1.2+1 - 02 August 2020
 - v0.1.1+1 - 16 May 2020
 - v0.1.0+2 - 24 April 2020
 - v0.1.0+1 - 24 April 2020

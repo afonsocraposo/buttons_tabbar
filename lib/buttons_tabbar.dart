@@ -165,7 +165,6 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
 
   @override
   void dispose() {
-    if (_controller != null) _controller.dispose();
     _scrollController.dispose();
     super.dispose();
   }
