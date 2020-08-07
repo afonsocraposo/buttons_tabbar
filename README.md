@@ -1,7 +1,8 @@
+
 # Buttons TabBar
 
 <p>
-  <img src="https://img.shields.io/badge/version-0.1.2B1-blue.svg" />
+  <img src="https://img.shields.io/badge/version-1.0.0+1-blue.svg" />
 </p>
 
 Open source Flutter package, tabbar where each tab indicator is a toggle button.
@@ -18,7 +19,7 @@ Install and import the package. Then just customize its parameters.
 dependencies:
   flutter:
     sdk: flutter
-  buttons_tabbar: ^0.1.2+1
+  buttons_tabbar: ^1.0.0+1
 ```
 
 ---
@@ -31,11 +32,11 @@ dependencies:
 
 ---
 
-## Example
+## ButtonsTabBar - Examples
 
-#### ButtonsTabBar - Example
+#### Example #1
 
-<img src="https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/example1.jpg" alt="ButtonsTabBar - Example" width="400" />
+<img src="https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/example1.jpg" alt="ButtonsTabBar - Example #1" width="400" />
 <br>
 
 ```dart
@@ -61,6 +62,38 @@ DefaultTabController(
 
 ```
 
+#### Example #2
+
+<img src="https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/example2.jpg" alt="ButtonsTabBar - Example #2" width="400" />
+<br>
+
+```dart
+DefaultTabController(
+          length: ...,
+          child: Column(
+            children: <Widget>[
+              ButtonsTabBar(
+                backgroundColor: Colors.blue[600],
+                unselectedBackgroundColor: Colors.white,
+                labelStyle:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+		unselectedLabelStyle: TextStyle(
+                    color: Colors.blue[600], fontWeight: FontWeight.bold),
+                borderWidth: 1,
+                unselectedBorderColor: Colors.blue[600],
+                radius: 100,
+                tabs: ...,
+              ),
+              Expanded(
+                child: TabBarView(
+                  children: ...,
+                ),
+              ),
+            ],
+          ),
+        )
+```
+
 ---
 
 ## ButtonsTabBar Parameters
@@ -72,8 +105,11 @@ DefaultTabController(
 | duration                  | `int`           | The duration in milliseconds of the transition animation.                                                                                 | `250`                            |
 | backgroundColor           | `Color`         | The background color of the button on its selected state.                                                                                 | `Colors.blueAccent`              |
 | unselectedBackgroundColor | `Color`         | The background color of the button on its unselected state.                                                                               | `Colors.grey`                    |
-| labelStyle                | `TextStyle`     | The `TextStyle]` of the button's `Text` on its selected state. The color provided on the TextStyle will be used for the `Icon`'s color.   | `TextStyle(color: Colors.white)` |
-| unselectedLabelStyle      | `TextStyle`     | The `TextStyle]` of the button's `Text` on its unselected state. The color provided on the TextStyle will be used for the `Icon`'s color. | `TextStyle(color: Colors.black)` |
+| borderWidth               | `double`        | The with of solid `Border` for each button. If the value is `null`, the border is not drawn.                                              | `null`                           |
+| borderColor               | `Color`         | The border color of the button on its selected state.                                                                                     | `Colors.black`                   |
+| unselectedBorderColor     | `Color`         | The border color of the button on its unselected state. If it's value is `null`, the `Color` of `borderColor` is used.                    | `null`                           |
+| labelStyle                | `TextStyle`     | The `TextStyle` of the button's `Text` on its selected state. The color provided on the TextStyle will be used for the `Icon`'s color.    | `TextStyle(color: Colors.white)` |
+| unselectedLabelStyle      | `TextStyle`     | The `TextStyle` of the button's `Text` on its unselected state. The color provided on the TextStyle will be used for the `Icon`'s color.  | `TextStyle(color: Colors.black)` |
 | physics                   | `ScrollPhysics` | The physics used for the `ScrollController`of the tabs list.                                                                              | `BouncingScrollPhysics`          |
 | contentPadding            | `EdgeInsets`    | The `EdgeInsets` used for the `Padding` of the buttons' content.                                                                          | `EdgeInsets.all(4)`              |
 | buttonMargin              | `EdgeInsets`    | The `EdgeInsets` used for the `Margin` of the buttons.                                                                                    | `EdgeInsets.all(4)`              |
@@ -88,6 +124,7 @@ If you have any suggestion or problem, let me know and I'll try to improve or fi
 
 ## Versioning
 
+- v1.0.0+1 - 07 August 2020
 - v0.1.2+1 - 02 August 2020
 - v0.1.1+1 - 16 May 2020
 - v0.1.0+2 - 24 April 2020

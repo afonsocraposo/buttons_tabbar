@@ -16,6 +16,9 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.unselectedBackgroundColor = Colors.grey,
     this.labelStyle,
     this.unselectedLabelStyle,
+    this.borderWidth,
+    this.borderColor = Colors.black,
+    this.unselectedBorderColor,
     this.physics,
     this.contentPadding,
     this.buttonMargin,
@@ -55,6 +58,24 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
   ///
   /// The default value is: [TextStyle(color: Colors.black)].
   final TextStyle unselectedLabelStyle;
+
+  /// The with of solid [Border] for each button. If no value is provided, the border
+  /// is not drawn.
+  ///
+  /// The default value is: null.
+  final double borderWidth;
+
+  /// The [Color] of solid [Border] for each button. To hide the [Border], provide
+  /// [Colors.transparent].
+  ///
+  /// The default value is: [Colors.black].
+  final Color borderColor;
+
+  /// The [Color] of solid [Border] for each button. If no value is provided, the value of
+  /// [this.borderColor] is used. To hide the [Border], provide [Colors.transparent].
+  ///
+  /// The default value is: null.
+  final Color unselectedBorderColor;
 
   /// The physics used for the [ScrollController] of the tabs list.
   ///
@@ -110,9 +131,15 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
   Animation<Color> _colorTweenForegroundDeactivate;
   Animation<Color> _colorTweenBackgroundActivate;
   Animation<Color> _colorTweenBackgroundDeactivate;
+  Animation<Color> _colorTweenBorderActivate;
+  Animation<Color> _colorTweenBorderDeactivate;
 
   Color _unselectedForegroundColor;
   Color _foregroundColor;
+
+  Color _unselectedBorderColor;
+  Color _borderColor;
+  bool _borderAnimation;
 
   TextStyle _unselectedLabelStyle;
   TextStyle _labelStyle;
@@ -140,6 +167,10 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     _foregroundColor = _labelStyle.color ?? Colors.white;
     _unselectedForegroundColor = _unselectedLabelStyle.color ?? Colors.black;
 
+    _borderColor = widget.borderColor;
+    _unselectedBorderColor = widget.unselectedBorderColor ?? widget.borderColor;
+    _borderAnimation = _borderColor != _unselectedBorderColor;
+
     _contentPadding = widget.contentPadding ?? EdgeInsets.all(4);
     _buttonMargin = widget.buttonMargin ?? EdgeInsets.all(4);
 
@@ -159,13 +190,23 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     _colorTweenForegroundDeactivate =
         ColorTween(begin: _foregroundColor, end: _unselectedForegroundColor)
             .animate(_animationController);
+
+    if (_borderAnimation) {
+      _colorTweenBorderActivate =
+          ColorTween(begin: _unselectedBorderColor, end: _borderColor)
+              .animate(_animationController);
+      _colorTweenBorderDeactivate =
+          ColorTween(begin: _borderColor, end: _unselectedBorderColor)
+              .animate(_animationController);
+    }
+
     // so the buttons start in their "final" state (color)
     _animationController.value = 1.0;
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _scrollController?.dispose();
     super.dispose();
   }
 
@@ -192,7 +233,20 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
                 : widget.unselectedBackgroundColor),
         // make the button a rectangle with round corners
         shape: RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(widget.radius)),
+          side: widget.borderWidth == null
+              ? BorderSide.none
+              : BorderSide(
+                  color: _borderAnimation
+                      ? (index == _currentIndex
+                          ? _colorTweenBorderActivate.value
+                          : (index == _prevIndex
+                              ? _colorTweenBorderDeactivate.value
+                              : _unselectedBorderColor))
+                      : _borderColor,
+                  width: widget.borderWidth,
+                  style: BorderStyle.solid),
+          borderRadius: BorderRadius.circular(widget.radius),
+        ),
         onPressed: () {
           _goToIndex(index);
         },
@@ -338,3 +392,4 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
         curve: Curves.easeInOut);
   }
 }
+
