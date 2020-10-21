@@ -1,3 +1,9 @@
+## [1.0.1] - 21 October 2020
+
+Bugs fixed:
+- `animateTo` was not updating the TabBar state
+- `initialIndex` was not working
+
 ## [1.0.0+1] - 07 August 2020
 
 Added the possibility of adding a border to each button.

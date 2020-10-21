@@ -74,7 +74,7 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
   /// The [Color] of solid [Border] for each button. If no value is provided, the value of
   /// [this.borderColor] is used. To hide the [Border], provide [Colors.transparent].
   ///
-  /// The default value is: null.
+  /// The default value is: [Colors.black].
   final Color unselectedBorderColor;
 
   /// The physics used for the [ScrollController] of the tabs list.
@@ -202,6 +202,21 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
 
     // so the buttons start in their "final" state (color)
     _animationController.value = 1.0;
+
+    _controller = widget.controller ?? DefaultTabController.of(context);
+    // this will execute the function every time there's a swipe animation
+    _controller.animation.addListener(_handleTabAnimation);
+    // this will execute the function every time there's a state change of the controller
+    _controller.addListener(_handleController);
+    // move to initial index
+    _currentIndex = _controller.index;
+  }
+
+  void _handleController() {
+    if (_controller.indexIsChanging) {
+      // update highlighted index when controller index is changing
+      _goToIndex(_controller.index);
+    }
   }
 
   @override
@@ -248,7 +263,8 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
           borderRadius: BorderRadius.circular(widget.radius),
         ),
         onPressed: () {
-          _goToIndex(index);
+          _controller.animateTo(index);
+          //_goToIndex(index);
         },
         child: Row(
           children: <Widget>[
@@ -282,11 +298,6 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
 
   @override
   Widget build(BuildContext context) {
-    if (_controller == null) {
-      _controller = widget.controller ?? DefaultTabController.of(context);
-      // this will execute the function every time there's a swipe animation
-      _controller.animation.addListener(_handleTabAnimation);
-    }
     return AnimatedBuilder(
       animation: _colorTweenBackgroundActivate,
       builder: (context, child) => SizedBox(
@@ -305,14 +316,13 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
 
   // runs during the switching tabs animation
   _handleTabAnimation() {
+    //print(_controller.animation.isCompleted);
     _aniIndex = ((_controller.animation.value > _prevAniValue)
             ? _controller.animation.value
             : _prevAniValue)
         .round();
     if (!_controller.indexIsChanging && _aniIndex != _currentIndex) {
-      setState(() {
-        _setCurrentIndex(_aniIndex);
-      });
+      _setCurrentIndex(_aniIndex);
     }
     _prevAniValue = _controller.animation.value;
   }
@@ -329,8 +339,8 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       // change the index
       _prevIndex = _currentIndex;
       _currentIndex = index;
-      _scrollTo(index); // scroll TabBar if needed
     });
+    _scrollTo(index); // scroll TabBar if needed
     _triggerAnimation();
   }
 
