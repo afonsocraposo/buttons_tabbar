@@ -155,7 +155,6 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
   @override
   void initState() {
     super.initState();
-    print("Init");
 
     _tabKeys = widget.tabs.map((Widget tab) => GlobalKey()).toList();
 
@@ -380,7 +379,6 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
 
   // runs during the switching tabs animation
   _handleTabAnimation() {
-    //print(_controller.animation.isCompleted);
     _aniIndex = ((_controller.animation.value > _prevAniValue)
             ? _controller.animation.value
             : _prevAniValue)
