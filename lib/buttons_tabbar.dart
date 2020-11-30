@@ -155,6 +155,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
   @override
   void initState() {
     super.initState();
+    print("Init");
 
     _tabKeys = widget.tabs.map((Widget tab) => GlobalKey()).toList();
 
@@ -202,14 +203,60 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
 
     // so the buttons start in their "final" state (color)
     _animationController.value = 1.0;
+  }
 
-    _controller = widget.controller ?? DefaultTabController.of(context);
-    // this will execute the function every time there's a swipe animation
-    _controller.animation.addListener(_handleTabAnimation);
-    // this will execute the function every time there's a state change of the controller
-    _controller.addListener(_handleController);
-    // move to initial index
-    _currentIndex = _controller.index;
+  void _updateTabController() {
+    final TabController newController =
+        widget.controller ?? DefaultTabController.of(context);
+    assert(() {
+      if (newController == null) {
+        throw FlutterError('No TabController for ${widget.runtimeType}.\n'
+            'When creating a ${widget.runtimeType}, you must either provide an explicit '
+            'TabController using the "controller" property, or you must ensure that there '
+            'is a DefaultTabController above the ${widget.runtimeType}.\n'
+            'In this case, there was neither an explicit controller nor a default controller.');
+      }
+      return true;
+    }());
+
+    if (newController == _controller) return;
+
+    if (_controllerIsValid) {
+      _controller.animation.removeListener(_handleTabAnimation);
+      _controller.removeListener(_handleController);
+    }
+    _controller = newController;
+    if (_controller != null) {
+      _controller.animation.addListener(_handleTabAnimation);
+      _controller.addListener(_handleController);
+      _currentIndex = _controller.index;
+    }
+  }
+
+  // If the TabBar is rebuilt with a new tab controller, the caller should
+  // dispose the old one. In that case the old controller's animation will be
+  // null and should not be accessed.
+  bool get _controllerIsValid => _controller?.animation != null;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    assert(debugCheckHasMaterial(context));
+    _updateTabController();
+  }
+
+  @override
+  void didUpdateWidget(ButtonsTabBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.controller != oldWidget.controller) {
+      _updateTabController();
+    }
+    if (widget.tabs.length > oldWidget.tabs.length) {
+      final int delta = widget.tabs.length - oldWidget.tabs.length;
+      _tabKeys.addAll(List<GlobalKey>.generate(delta, (int n) => GlobalKey()));
+    } else if (widget.tabs.length < oldWidget.tabs.length) {
+      _tabKeys.removeRange(widget.tabs.length, oldWidget.tabs.length);
+    }
   }
 
   void _handleController() {
@@ -221,6 +268,11 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
 
   @override
   void dispose() {
+    if (_controllerIsValid) {
+      _controller.animation.removeListener(_handleTabAnimation);
+      _controller.removeListener(_handleController);
+    }
+    _controller = null;
     _scrollController?.dispose();
     super.dispose();
   }
@@ -263,8 +315,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
           borderRadius: BorderRadius.circular(widget.radius),
         ),
         onPressed: () {
-          _controller.animateTo(index);
-          //_goToIndex(index);
+          _controller?.animateTo(index);
         },
         child: Row(
           children: <Widget>[
@@ -298,6 +349,19 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
 
   @override
   Widget build(BuildContext context) {
+    assert(() {
+      if (_controller.length != widget.tabs.length) {
+        throw FlutterError(
+            "Controller's length property (${_controller.length}) does not match the "
+            "number of tabs (${widget.tabs.length}) present in TabBar's tabs property.");
+      }
+      return true;
+    }());
+    if (_controller.length == 0) {
+      return Container(
+        height: _kTabHeight,
+      );
+    }
     return AnimatedBuilder(
       animation: _colorTweenBackgroundActivate,
       builder: (context, child) => SizedBox(
@@ -330,7 +394,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
   _goToIndex(int index) {
     if (index != _currentIndex) {
       _setCurrentIndex(index);
-      _controller.animateTo(index);
+      _controller?.animateTo(index);
     }
   }
 

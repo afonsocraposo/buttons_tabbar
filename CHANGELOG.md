@@ -1,3 +1,7 @@
+## [1.0.2] - 30 November 2020
+
+Bug when using the DefaultTabController fixed.
+
 ## [1.0.1] - 21 October 2020
 
 Bugs fixed:
