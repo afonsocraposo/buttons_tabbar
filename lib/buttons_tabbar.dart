@@ -1,5 +1,3 @@
-library buttons_tabbar;
-
 import 'package:flutter/material.dart';
 
 // Default values from the Flutter's TabBar.
@@ -416,14 +414,14 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
 
   _scrollTo(int index) {
     // get the screen width. This is used to check if we have an element off screen
-    RenderBox tabsContainer =
+    final RenderBox tabsContainer =
         _tabsContainerKey.currentContext.findRenderObject();
     double screenWidth = tabsContainer.size.width;
 
     // get the button we want to scroll to
-    RenderBox renderBox = _tabKeys[index].currentContext.findRenderObject();
+    RenderBox renderBox = _tabKeys[index]?.currentContext?.findRenderObject();
     // get its size
-    double size = renderBox.size.width;
+    double size = renderBox?.size?.width;
     // and position
     double position = renderBox.localToGlobal(Offset.zero).dx;
 
@@ -433,28 +431,32 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     // if the button is to the left of the middle
     if (offset < 0) {
       // get the first button
-      renderBox = _tabKeys[0].currentContext.findRenderObject();
-      // get the position of the first button of the TabBar
-      position = renderBox.localToGlobal(Offset.zero).dx;
+      renderBox = _tabKeys[0]?.currentContext?.findRenderObject();
+      if (renderBox != null) {
+        // get the position of the first button of the TabBar
+        position = renderBox.localToGlobal(Offset.zero).dx;
 
-      // if the offset pulls the first button away from the left side, we limit that movement so the first button is stuck to the left side
-      if (position > offset) offset = position;
+        // if the offset pulls the first button away from the left side, we limit that movement so the first button is stuck to the left side
+        if (position > offset) offset = position;
+      }
     } else {
       // if the button is to the right of the middle
 
       // get the last button
-      renderBox = _tabKeys.last.currentContext.findRenderObject();
-      // get its position
-      position = renderBox.localToGlobal(Offset.zero).dx;
-      // and size
-      size = renderBox.size.width;
+      renderBox = _tabKeys.last?.currentContext?.findRenderObject();
+      if (renderBox != null) {
+        // get its position
+        position = renderBox.localToGlobal(Offset.zero).dx;
+        // and size
+        size = renderBox.size.width;
 
-      // if the last button doesn't reach the right side, use it's right side as the limit of the screen for the TabBar
-      if (position + size < screenWidth) screenWidth = position + size;
+        // if the last button doesn't reach the right side, use it's right side as the limit of the screen for the TabBar
+        if (position + size < screenWidth) screenWidth = position + size;
 
-      // if the offset pulls the last button away from the right side limit, we reduce that movement so the last button is stuck to the right side limit
-      if (position + size - offset < screenWidth) {
-        offset = position + size - screenWidth;
+        // if the offset pulls the last button away from the right side limit, we reduce that movement so the last button is stuck to the right side limit
+        if (position + size - offset < screenWidth) {
+          offset = position + size - screenWidth;
+        }
       }
     }
 
@@ -464,4 +466,3 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
         curve: Curves.easeInOut);
   }
 }
-

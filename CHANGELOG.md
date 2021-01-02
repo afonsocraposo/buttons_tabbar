@@ -1,3 +1,7 @@
+## [1.0.3] - 01 January 2021
+
+Bug on scrolling animation fixed.
+
 ## [1.0.2+1] - 30 November 2020
 
 Bug when using the DefaultTabController fixed.
