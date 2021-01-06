@@ -22,6 +22,7 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.buttonMargin,
     this.labelSpacing = 4.0,
     this.radius = 7.0,
+    this.height = _kTabHeight,
   }) : super(key: key);
 
   /// Typically a list of two or more [Tab] widgets.
@@ -97,16 +98,21 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
   /// The value of the [BorderRadius.circular] applied to each button.
   final double radius;
 
+  /// Override the default height. If no value is provided, the material height, 46.0,
+  /// is used.
+  final double height;
+
   @override
   Size get preferredSize {
     for (Widget item in tabs) {
       if (item is Tab) {
         final Tab tab = item;
         if (tab.text != null && tab.icon != null)
-          return Size.fromHeight(_kTextAndIconTabHeight);
+          return Size.fromHeight(
+              height != _kTabHeight ? height : _kTextAndIconTabHeight);
       }
     }
-    return Size.fromHeight(_kTabHeight);
+    return Size.fromHeight(height);
   }
 
   @override
@@ -356,14 +362,14 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     }());
     if (_controller.length == 0) {
       return Container(
-        height: _kTabHeight,
+        height: widget.height,
       );
     }
     return AnimatedBuilder(
       animation: _colorTweenBackgroundActivate,
       builder: (context, child) => SizedBox(
         key: _tabsContainerKey,
-        height: _kTabHeight,
+        height: widget.height,
         child: ListView.builder(
             physics: _scrollPhysics,
             controller: _scrollController,

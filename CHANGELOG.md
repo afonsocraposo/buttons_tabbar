@@ -1,3 +1,7 @@
+## [1.1.0] - 06 January 2021
+
+Tab height can be overriden.
+
 ## [1.0.3] - 01 January 2021
 
 Bug on scrolling animation fixed.
