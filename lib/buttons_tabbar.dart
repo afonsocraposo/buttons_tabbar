@@ -254,6 +254,14 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     if (widget.controller != oldWidget.controller) {
       _updateTabController();
     }
+
+    // Update the style
+    if (widget.labelStyle != _labelStyle)
+      _labelStyle = widget.labelStyle ?? TextStyle(color: Colors.white);
+    if (widget.unselectedLabelStyle != _unselectedLabelStyle)
+      _unselectedLabelStyle =
+          widget.unselectedLabelStyle ?? TextStyle(color: Colors.black);
+
     if (widget.tabs.length > oldWidget.tabs.length) {
       final int delta = widget.tabs.length - oldWidget.tabs.length;
       _tabKeys.addAll(List<GlobalKey>.generate(delta, (int n) => GlobalKey()));
@@ -334,7 +342,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
                     child: tab.icon)
                 : Container(),
             SizedBox(
-              width: tab.icon == null || tab.text == null
+              width: tab.icon == null || (tab.text == null && tab.child == null)
                   ? 0
                   : widget.labelSpacing,
             ),
@@ -343,7 +351,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
                     tab.text,
                     style: textStyle,
                   )
-                : Container()
+                : (tab.child ?? Container())
           ],
         ),
       ),

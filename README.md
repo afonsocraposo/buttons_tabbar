@@ -17,7 +17,7 @@ Install and import the package. Then just customize its parameters.
 dependencies:
   flutter:
     sdk: flutter
-  buttons_tabbar: ^1.1.0
+  buttons_tabbar: ^1.1.1
 ```
 
 ---
@@ -113,6 +113,7 @@ DefaultTabController(
 | buttonMargin              | `EdgeInsets`    | The `EdgeInsets` used for the `Margin` of the buttons.                                                                                    | `EdgeInsets.all(4)`              |
 | labelSpacing              | `double`        | The spacing between the `Icon` and the `Text`. If only one of those is provided, no spacing is applied.                                   | `4.0`                            |
 | radius                    | `double`        | The value of the `BorderRadius.circular` applied to each button.                                                                          | `7.0`                            |
+| height                    | `double`        | Override the material TabBar height value.                                                                                                | `46.0`                           |
 
 ---
 
@@ -122,6 +123,7 @@ If you have any suggestion or problem, let me know and I'll try to improve or fi
 
 ## Versioning
 
+- v1.1.1 - 07 January 2021
 - v1.1.0 - 06 January 2021
 - v1.0.3 - 01 January 2021
 - v1.0.2+1 - 30 November 2020

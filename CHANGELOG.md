@@ -1,3 +1,7 @@
+## [1.1.1] - 07 January 2021
+
+You can now change the font size of labels and provide a child widget for each Tab.
+
 ## [1.1.0] - 06 January 2021
 
 Tab height can be overriden.
