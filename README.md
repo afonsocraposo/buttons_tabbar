@@ -1,4 +1,3 @@
-
 # Buttons TabBar
 
 [![Pub](https://img.shields.io/pub/v/buttons_tabbar.svg)](https://pub.dev/packages/buttons_tabbar)
@@ -9,18 +8,18 @@ Made by [Afonso Raposo](https://afonsoraposo.com).
 
 See the full example [here](https://github.com/Afonsocraposo/buttons_tabbar/tree/master/example/example.dart)
 
-## Screenshots
-
 Install and import the package. Then just customize its parameters.
+
+## Installation
 
 ```yaml
 dependencies:
   flutter:
     sdk: flutter
-  buttons_tabbar: ^1.1.1
+  buttons_tabbar: ^1.1.2
 ```
 
----
+## Screenshots
 
 #### Default
 
@@ -96,24 +95,24 @@ DefaultTabController(
 
 ## ButtonsTabBar Parameters
 
-| Parameter                 | Type            | Description                                                                                                                               | Default                          |
-| ------------------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| **tabs**                  | `List<Widget>`  | The tabs to display. Typically a list of two or more `Tab` widgets.                                                                       | **`@required`**                  |
-| controller                | `TabController` | This widget's selection and animation state.                                                                                              | `DefaultTabController.of`        |
-| duration                  | `int`           | The duration in milliseconds of the transition animation.                                                                                 | `250`                            |
-| backgroundColor           | `Color`         | The background color of the button on its selected state.                                                                                 | `Colors.blueAccent`              |
-| unselectedBackgroundColor | `Color`         | The background color of the button on its unselected state.                                                                               | `Colors.grey`                    |
-| borderWidth               | `double`        | The with of solid `Border` for each button. If the value is `null`, the border is not drawn.                                              | `null`                           |
-| borderColor               | `Color`         | The border color of the button on its selected state.                                                                                     | `Colors.black`                   |
-| unselectedBorderColor     | `Color`         | The border color of the button on its unselected state. If it's value is `null`, the `Color` of `borderColor` is used.                    | `null`                           |
-| labelStyle                | `TextStyle`     | The `TextStyle` of the button's `Text` on its selected state. The color provided on the TextStyle will be used for the `Icon`'s color.    | `TextStyle(color: Colors.white)` |
-| unselectedLabelStyle      | `TextStyle`     | The `TextStyle` of the button's `Text` on its unselected state. The color provided on the TextStyle will be used for the `Icon`'s color.  | `TextStyle(color: Colors.black)` |
-| physics                   | `ScrollPhysics` | The physics used for the `ScrollController`of the tabs list.                                                                              | `BouncingScrollPhysics`          |
-| contentPadding            | `EdgeInsets`    | The `EdgeInsets` used for the `Padding` of the buttons' content.                                                                          | `EdgeInsets.all(4)`              |
-| buttonMargin              | `EdgeInsets`    | The `EdgeInsets` used for the `Margin` of the buttons.                                                                                    | `EdgeInsets.all(4)`              |
-| labelSpacing              | `double`        | The spacing between the `Icon` and the `Text`. If only one of those is provided, no spacing is applied.                                   | `4.0`                            |
-| radius                    | `double`        | The value of the `BorderRadius.circular` applied to each button.                                                                          | `7.0`                            |
-| height                    | `double`        | Override the material TabBar height value.                                                                                                | `46.0`                           |
+| Parameter                 | Type            | Description                                                                                                                              | Default                          |
+| ------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| **tabs**                  | `List<Widget>`  | The tabs to display. Typically a list of two or more `Tab` widgets.                                                                      | **`@required`**                  |
+| controller                | `TabController` | This widget's selection and animation state.                                                                                             | `DefaultTabController.of`        |
+| duration                  | `int`           | The duration in milliseconds of the transition animation.                                                                                | `250`                            |
+| backgroundColor           | `Color`         | The background color of the button on its selected state.                                                                                | `Colors.blueAccent`              |
+| unselectedBackgroundColor | `Color`         | The background color of the button on its unselected state.                                                                              | `Colors.grey`                    |
+| borderWidth               | `double`        | The with of solid `Border` for each button. If the value is `null`, the border is not drawn.                                             | `null`                           |
+| borderColor               | `Color`         | The border color of the button on its selected state.                                                                                    | `Colors.black`                   |
+| unselectedBorderColor     | `Color`         | The border color of the button on its unselected state. If it's value is `null`, the `Color` of `borderColor` is used.                   | `null`                           |
+| labelStyle                | `TextStyle`     | The `TextStyle` of the button's `Text` on its selected state. The color provided on the TextStyle will be used for the `Icon`'s color.   | `TextStyle(color: Colors.white)` |
+| unselectedLabelStyle      | `TextStyle`     | The `TextStyle` of the button's `Text` on its unselected state. The color provided on the TextStyle will be used for the `Icon`'s color. | `TextStyle(color: Colors.black)` |
+| physics                   | `ScrollPhysics` | The physics used for the `ScrollController`of the tabs list.                                                                             | `BouncingScrollPhysics`          |
+| contentPadding            | `EdgeInsets`    | The `EdgeInsets` used for the `Padding` of the buttons' content.                                                                         | `EdgeInsets.all(4)`              |
+| buttonMargin              | `EdgeInsets`    | The `EdgeInsets` used for the `Margin` of the buttons.                                                                                   | `EdgeInsets.all(4)`              |
+| labelSpacing              | `double`        | The spacing between the `Icon` and the `Text`. If only one of those is provided, no spacing is applied.                                  | `4.0`                            |
+| radius                    | `double`        | The value of the `BorderRadius.circular` applied to each button.                                                                         | `7.0`                            |
+| height                    | `double`        | Override the material TabBar height value.                                                                                               | `46.0`                           |
 
 ---
 
@@ -123,6 +122,7 @@ If you have any suggestion or problem, let me know and I'll try to improve or fi
 
 ## Versioning
 
+- v1.1.2 - 03 March 2021
 - v1.1.1 - 07 January 2021
 - v1.1.0 - 06 January 2021
 - v1.0.3 - 01 January 2021

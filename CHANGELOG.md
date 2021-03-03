@@ -1,3 +1,7 @@
+## [1.1.2] - 03 March 2021
+
+Now supports text Directionality.
+
 ## [1.1.1] - 07 January 2021
 
 You can now change the font size of labels and provide a child widget for each Tab.
@@ -21,6 +25,7 @@ Bug when using the DefaultTabController fixed.
 ## [1.0.1] - 21 October 2020
 
 Bugs fixed:
+
 - `animateTo` was not updating the TabBar state
 - `initialIndex` was not working
 

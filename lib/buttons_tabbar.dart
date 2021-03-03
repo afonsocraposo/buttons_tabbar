@@ -156,6 +156,9 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
   int _aniIndex = 0;
   double _prevAniValue = 0;
 
+  // check the direction of the text LTR or RTL
+  bool _textLTR;
+
   @override
   void initState() {
     super.initState();
@@ -296,6 +299,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
             ? TextStyle.lerp(
                 _labelStyle, _unselectedLabelStyle, _animationController.value)
             : _unselectedLabelStyle));
+
     return Container(
       key: _tabKeys[index],
       // padding for the buttons
@@ -368,11 +372,9 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       }
       return true;
     }());
-    if (_controller.length == 0) {
-      return Container(
-        height: widget.height,
-      );
-    }
+    if (_controller.length == 0) return Container(height: widget.height);
+
+    _textLTR = Directionality.of(context).index == 1;
     return AnimatedBuilder(
       animation: _colorTweenBackgroundActivate,
       builder: (context, child) => SizedBox(
@@ -445,7 +447,9 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     // if the button is to the left of the middle
     if (offset < 0) {
       // get the first button
-      renderBox = _tabKeys[0]?.currentContext?.findRenderObject();
+      renderBox = (_textLTR ? _tabKeys.first : _tabKeys.last)
+          ?.currentContext
+          ?.findRenderObject();
       if (renderBox != null) {
         // get the position of the first button of the TabBar
         position = renderBox.localToGlobal(Offset.zero).dx;
@@ -457,7 +461,9 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       // if the button is to the right of the middle
 
       // get the last button
-      renderBox = _tabKeys.last?.currentContext?.findRenderObject();
+      renderBox = (_textLTR ? _tabKeys.last : _tabKeys.first)
+          ?.currentContext
+          ?.findRenderObject();
       if (renderBox != null) {
         // get its position
         position = renderBox.localToGlobal(Offset.zero).dx;
@@ -468,11 +474,11 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
         if (position + size < screenWidth) screenWidth = position + size;
 
         // if the offset pulls the last button away from the right side limit, we reduce that movement so the last button is stuck to the right side limit
-        if (position + size - offset < screenWidth) {
+        if (position + size - offset < screenWidth)
           offset = position + size - screenWidth;
-        }
       }
     }
+    offset *= (_textLTR ? 1 : -1);
 
     // scroll the calculated ammount
     _scrollController.animateTo(offset + _scrollController.offset,
