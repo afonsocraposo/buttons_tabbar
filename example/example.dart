@@ -1,4 +1,4 @@
-import '../lib/buttons_tabbar.dart';
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
