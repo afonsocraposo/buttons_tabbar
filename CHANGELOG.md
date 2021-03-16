@@ -1,3 +1,7 @@
+## [1.2.0] - 16 March 2021
+
+Upgrade to support Null Safety and Flutter 2.
+
 ## [1.1.2] - 03 March 2021
 
 Now supports text Directionality.
