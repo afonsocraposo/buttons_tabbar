@@ -256,6 +256,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       child: TextButton(
         onPressed: () => _controller?.animateTo(index),
         style: TextButton.styleFrom(
+          minimumSize: Size.fromWidth(48),
           padding: widget.contentPadding,
           backgroundColor: backgroundColor,
           textStyle: textStyle,
@@ -312,7 +313,6 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       builder: (context, child) => SizedBox(
         key: _tabsContainerKey,
         height: widget.preferredSize.height,
-        //height: 58,
         child: ListView.builder(
           physics: widget.physics,
           controller: _scrollController,

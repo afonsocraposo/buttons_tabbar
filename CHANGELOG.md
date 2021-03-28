@@ -1,3 +1,7 @@
+## [1.2.1] - 28 March 2021
+
+Fixed "BoxConstraints forces an infinite width".
+
 ## [1.2.0] - 16 March 2021
 
 Upgrade to support Null Safety and Flutter 2.
