@@ -16,7 +16,7 @@ Install and import the package. Then just customize its parameters.
 dependencies:
   flutter:
     sdk: flutter
-  buttons_tabbar: ^1.2.1
+  buttons_tabbar: ^1.2.2
 ```
 
 ## Screenshots
@@ -88,6 +88,46 @@ DefaultTabController(
         )
 ```
 
+#### Example #3
+
+<img src="https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/example3.jpg" alt="ButtonsTabBar - Example #3" width="400" />
+<br>
+
+```dart
+DefaultTabController(
+  length: 6,
+  child: Column(
+    children: <Widget>[
+      ButtonsTabBar(
+        radius: 12,
+        contentPadding: EdgeInsets.symmetric(horizontal: 12),
+        borderWidth: 2,
+        borderColor: Colors.transparent,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: <Color>[
+              Color(0xFF0D47A1),
+              Color(0xFF1976D2),
+              Color(0xFF42A5F5),
+            ],
+          ),
+        ),
+        unselectedLabelStyle: TextStyle(color: Colors.black),
+        labelStyle: TextStyle(color: Colors.white),
+        height: 56,
+        tabs: ...,
+      ),
+      Expanded(
+        child: TabBarView(
+          children: ...,
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+
 ---
 
 ## ButtonsTabBar Parameters
@@ -99,6 +139,8 @@ DefaultTabController(
 | duration                  | `int`           | The duration in milliseconds of the transition animation.                                                                                | `250`                                   |
 | backgroundColor           | `Color`         | The background color of the button on its selected state.                                                                                | `Theme.of(context).accentColor`         |
 | unselectedBackgroundColor | `Color`         | The background color of the button on its unselected state.                                                                              | `Colors.grey[300]`                      |
+| decoration                | `BoxDecoration` | The `BoxDecoration` of the button on its selected state.                                                                                 | `null`                                  |
+| unselectedDecoration      | `BoxDecoration` | The `BoxDecoration` of the button on its unselected state.                                                                               | `null`                                  |
 | borderWidth               | `double`        | The with of solid `Border` for each button.                                                                                              | `0`                                     |
 | borderColor               | `Color`         | The border color of the button on its selected state.                                                                                    | `Colors.black`                          |
 | unselectedBorderColor     | `Color`         | The border color of the button on its unselected state. If it's value is `null`, the `Color` of `borderColor` is used.                   | `null`                                  |
@@ -119,7 +161,8 @@ If you have any suggestion or problem, let me know and I'll try to improve or fi
 
 ## Versioning
 
-- v1.2.l - 28 March 2021
+- v1.2.2 - 25 April 2021
+- v1.2.1 - 28 March 2021
 - v1.2.0 - 16 March 2021
 - v1.1.2 - 03 March 2021
 - v1.1.1 - 07 January 2021

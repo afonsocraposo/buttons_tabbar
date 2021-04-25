@@ -11,18 +11,23 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.duration = 250,
     this.backgroundColor,
     this.unselectedBackgroundColor,
+    this.decoration,
+    this.unselectedDecoration,
     this.labelStyle,
     this.unselectedLabelStyle,
     this.borderWidth = 0,
     this.borderColor = Colors.black,
-    this.unselectedBorderColor,
+    this.unselectedBorderColor = Colors.black,
     this.physics = const BouncingScrollPhysics(),
     this.contentPadding = const EdgeInsets.symmetric(horizontal: 4),
     this.buttonMargin = const EdgeInsets.all(4),
     this.labelSpacing = 4.0,
     this.radius = 7.0,
     this.height = _kTabHeight,
-  }) : super(key: key);
+  }) : super(key: key) {
+    assert(backgroundColor == null || decoration == null);
+    assert(unselectedBackgroundColor == null || unselectedDecoration == null);
+  }
 
   /// Typically a list of two or more [Tab] widgets.
   ///
@@ -48,6 +53,16 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
   ///
   /// If [Color] is not provided, [Colors.grey[300]] is used.
   final Color? unselectedBackgroundColor;
+
+  /// The [BoxDecoration] of the button on its selected state.
+  ///
+  /// If [BoxDecoration] is not provided, [backgroundColor] is used.
+  final BoxDecoration? decoration;
+
+  /// The [BoxDecoration] of the button on its unselected state.
+  ///
+  /// If [BoxDecoration] is not provided, [unselectedBackgroundColor] is used.
+  final BoxDecoration? unselectedDecoration;
 
   /// The [TextStyle] of the button's [Text] on its selected state. The color provided
   /// on the TextStyle will be used for the [Icon]'s color.
@@ -76,7 +91,7 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
   /// [this.borderColor] is used.
   ///
   /// The default value is: [Colors.black].
-  final Color? unselectedBorderColor;
+  final Color unselectedBorderColor;
 
   /// The physics used for the [ScrollController] of the tabs list.
   ///
@@ -239,56 +254,72 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
         widget.unselectedLabelStyle ?? TextStyle(color: Colors.black),
         widget.labelStyle ?? TextStyle(color: Colors.white),
         animationValue);
-    final Color? backgroundColor = Color.lerp(
-        widget.unselectedBackgroundColor ?? Colors.grey[300],
-        widget.backgroundColor ?? Theme.of(context).accentColor,
-        animationValue);
     final Color? borderColor = Color.lerp(
-        widget.unselectedBorderColor ?? widget.borderColor,
-        widget.borderColor,
-        animationValue);
+        widget.unselectedBorderColor, widget.borderColor, animationValue);
     final Color foregroundColor = textStyle?.color ?? Colors.black;
+
+    final BoxDecoration? boxDecoration = BoxDecoration.lerp(
+        widget.unselectedDecoration ??
+            BoxDecoration(
+                color: widget.unselectedBackgroundColor ?? Colors.grey[300]),
+        widget.decoration ??
+            BoxDecoration(
+                color: widget.backgroundColor ?? Theme.of(context).accentColor),
+        animationValue);
 
     return Padding(
       key: _tabKeys[index],
       // padding for the buttons
       padding: widget.buttonMargin,
-      child: TextButton(
-        onPressed: () => _controller?.animateTo(index),
-        style: TextButton.styleFrom(
-          minimumSize: Size.fromWidth(48),
-          padding: widget.contentPadding,
-          backgroundColor: backgroundColor,
-          textStyle: textStyle,
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          shape: RoundedRectangleBorder(
-            side: (widget.borderWidth == 0)
-                ? BorderSide.none
-                : BorderSide(
-                    color: borderColor ?? Colors.black,
-                    width: widget.borderWidth,
-                    style: BorderStyle.solid),
-            borderRadius: BorderRadius.circular(widget.radius),
-          ),
-        ),
-        child: Row(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(widget.radius),
+        child: Stack(
           children: <Widget>[
-            tab.icon != null
-                ? IconTheme.merge(
-                    data: IconThemeData(size: 24.0, color: foregroundColor),
-                    child: tab.icon!)
-                : Container(),
-            SizedBox(
-              width: tab.icon == null || (tab.text == null && tab.child == null)
-                  ? 0
-                  : widget.labelSpacing,
+            Positioned.fill(
+              child: Container(
+                decoration: boxDecoration,
+              ),
             ),
-            tab.text != null
-                ? Text(
-                    tab.text!,
-                    style: textStyle,
-                  )
-                : (tab.child ?? Container())
+            TextButton(
+              onPressed: () => _controller?.animateTo(index),
+              style: TextButton.styleFrom(
+                minimumSize: Size.fromWidth(48),
+                padding: widget.contentPadding,
+                textStyle: textStyle,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                shape: RoundedRectangleBorder(
+                  side: (widget.borderWidth == 0)
+                      ? BorderSide.none
+                      : BorderSide(
+                          color: borderColor ?? Colors.black,
+                          width: widget.borderWidth,
+                          style: BorderStyle.solid),
+                  borderRadius: BorderRadius.circular(widget.radius),
+                ),
+              ),
+              child: Row(
+                children: <Widget>[
+                  tab.icon != null
+                      ? IconTheme.merge(
+                          data:
+                              IconThemeData(size: 24.0, color: foregroundColor),
+                          child: tab.icon!)
+                      : Container(),
+                  SizedBox(
+                    width: tab.icon == null ||
+                            (tab.text == null && tab.child == null)
+                        ? 0
+                        : widget.labelSpacing,
+                  ),
+                  tab.text != null
+                      ? Text(
+                          tab.text!,
+                          style: textStyle,
+                        )
+                      : (tab.child ?? Container())
+                ],
+              ),
+            ),
           ],
         ),
       ),

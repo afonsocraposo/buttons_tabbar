@@ -1,3 +1,7 @@
+## [1.2.2] - 25 April 2021
+
+Added `BoxDecoration` to buttons, allowing the use of gradients as background.
+
 ## [1.2.1] - 28 March 2021
 
 Fixed "BoxConstraints forces an infinite width".
