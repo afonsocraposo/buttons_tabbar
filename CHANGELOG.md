@@ -1,3 +1,7 @@
+## [1.3.0] - 25 April 2021
+
+Tab Buttons can now be centered.
+
 ## [1.2.2] - 25 April 2021
 
 Added `BoxDecoration` to buttons, allowing the use of gradients as background.

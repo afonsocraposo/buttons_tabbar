@@ -24,6 +24,7 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.labelSpacing = 4.0,
     this.radius = 7.0,
     this.height = _kTabHeight,
+    this.center = false,
   }) : super(key: key) {
     assert(backgroundColor == null || decoration == null);
     assert(unselectedBackgroundColor == null || unselectedDecoration == null);
@@ -122,6 +123,9 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
   /// for [contentPadding] and [buttonMargin].
   final double? height;
 
+  /// Center the tab buttons
+  final bool center;
+
   @override
   Size get preferredSize {
     return Size.fromHeight(height ??
@@ -142,6 +146,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
 
   late List<GlobalKey> _tabKeys;
   GlobalKey _tabsContainerKey = GlobalKey();
+  GlobalKey _tabsParentKey = GlobalKey();
 
   int _currentIndex = 0;
   int _prevIndex = -1;
@@ -151,9 +156,13 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
   // check the direction of the text LTR or RTL
   late bool _textLTR;
 
+  EdgeInsets _centerPadding = EdgeInsets.zero;
+
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance
+        ?.addPostFrameCallback((_) => _getCenterPadding(context));
 
     _tabKeys = widget.tabs.map((Widget tab) => GlobalKey()).toList();
 
@@ -238,6 +247,23 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     super.dispose();
   }
 
+  _getCenterPadding(BuildContext context) {
+    // get the screen width. This is used to check if we have an element off screen
+    final RenderBox tabsParent =
+        _tabsParentKey.currentContext!.findRenderObject() as RenderBox;
+    final double screenWidth = tabsParent.size.width;
+
+    RenderBox renderBox =
+        _tabKeys.first.currentContext?.findRenderObject() as RenderBox;
+    double size = renderBox.size.width;
+    final double left = (screenWidth - size) / 2;
+
+    renderBox = _tabKeys.last.currentContext?.findRenderObject() as RenderBox;
+    size = renderBox.size.width;
+    final double right = (screenWidth - size) / 2;
+    _centerPadding = EdgeInsets.only(left: left, right: right);
+  }
+
   Widget _buildButton(
     int index,
     Tab tab,
@@ -267,10 +293,17 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
                 color: widget.backgroundColor ?? Theme.of(context).accentColor),
         animationValue);
 
+    EdgeInsets buttonMargin = widget.buttonMargin;
+    if (index == 0) {
+      //
+    } else if (index == widget.tabs.length - 1) {
+      //
+    }
+
     return Padding(
       key: _tabKeys[index],
       // padding for the buttons
-      padding: widget.buttonMargin,
+      padding: buttonMargin,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(widget.radius),
         child: Stack(
@@ -339,18 +372,27 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     if (_controller!.length == 0) return Container(height: widget.height);
 
     _textLTR = Directionality.of(context).index == 1;
-    return AnimatedBuilder(
-      animation: _animationController,
-      builder: (context, child) => SizedBox(
-        key: _tabsContainerKey,
-        height: widget.preferredSize.height,
-        child: ListView.builder(
-          physics: widget.physics,
-          controller: _scrollController,
-          scrollDirection: Axis.horizontal,
-          itemCount: widget.tabs.length,
-          itemBuilder: (BuildContext context, int index) =>
-              _buildButton(index, widget.tabs[index] as Tab),
+    return Opacity(
+      // avoid showing the tabBar if centering was request and the centerPadding wasn't calculated yet
+      opacity: (!widget.center || _centerPadding != EdgeInsets.zero) ? 1 : 0,
+      child: AnimatedBuilder(
+        animation: _animationController,
+        key: _tabsParentKey,
+        builder: (context, child) => SizedBox(
+          key: _tabsContainerKey,
+          height: widget.preferredSize.height,
+          child: SingleChildScrollView(
+            physics: widget.physics,
+            controller: _scrollController,
+            scrollDirection: Axis.horizontal,
+            padding: widget.center ? _centerPadding : EdgeInsets.zero,
+            child: Row(
+              children: List.generate(
+                widget.tabs.length,
+                (int index) => _buildButton(index, widget.tabs[index] as Tab),
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -416,11 +458,11 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       renderBox = (_textLTR ? _tabKeys.first : _tabKeys.last)
           .currentContext
           ?.findRenderObject() as RenderBox;
-      // get the position of the first button of the TabBar
+      //// get the position of the first button of the TabBar
       position = renderBox.localToGlobal(Offset.zero).dx;
 
       // if the offset pulls the first button away from the left side, we limit that movement so the first button is stuck to the left side
-      if (position > offset) offset = position;
+      if (!widget.center && position > offset) offset = position;
     } else {
       // if the button is to the right of the middle
 
@@ -437,7 +479,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       if (position + size < screenWidth) screenWidth = position + size;
 
       // if the offset pulls the last button away from the right side limit, we reduce that movement so the last button is stuck to the right side limit
-      if (position + size - offset < screenWidth)
+      if (!widget.center && position + size - offset < screenWidth)
         offset = position + size - screenWidth;
     }
     offset *= (_textLTR ? 1 : -1);
