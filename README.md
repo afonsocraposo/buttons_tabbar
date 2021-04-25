@@ -161,25 +161,6 @@ DefaultTabController(
 
 If you have any suggestion or problem, let me know and I'll try to improve or fix it.
 
-## Versioning
-
-- v1.3.0 - 25 April 2021
-- v1.2.2 - 25 April 2021
-- v1.2.1 - 28 March 2021
-- v1.2.0 - 16 March 2021
-- v1.1.2 - 03 March 2021
-- v1.1.1 - 07 January 2021
-- v1.1.0 - 06 January 2021
-- v1.0.3 - 01 January 2021
-- v1.0.2+1 - 30 November 2020
-- v1.0.2 - 30 November 2020
-- v1.0.1 - 21 October 2020
-- v1.0.0+1 - 07 August 2020
-- v0.1.2+1 - 02 August 2020
-- v0.1.1+1 - 16 May 2020
-- v0.1.0+2 - 24 April 2020
-- v0.1.0+1 - 24 April 2020
-
 ## License
 
 GNU General Public License v3.0, see the [LICENSE.md](https://github.com/Afonsocraposo/buttons_tabbar/tree/master/LICENSE) file for details.
