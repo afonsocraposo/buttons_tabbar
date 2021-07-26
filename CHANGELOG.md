@@ -1,3 +1,7 @@
+## [1.3.1] - 26 July 2021
+
+Added `onTap` function to TabBar.
+
 ## [1.3.0] - 25 April 2021
 
 Tab Buttons can now be centered.

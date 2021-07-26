@@ -25,6 +25,7 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.radius = 7.0,
     this.height = _kTabHeight,
     this.center = false,
+    this.onTap,
   }) : super(key: key) {
     assert(backgroundColor == null || decoration == null);
     assert(unselectedBackgroundColor == null || unselectedDecoration == null);
@@ -125,6 +126,17 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
 
   /// Center the tab buttons
   final bool center;
+
+  /// An optional callback that's called when the [TabBar] is tapped.
+  ///
+  /// The callback is applied to the index of the tab where the tap occurred.
+  ///
+  /// This callback has no effect on the default handling of taps. It's for
+  /// applications that want to do a little extra work when a tab is tapped,
+  /// even if the tap doesn't change the [TabController]'s index. [TabBar] onTap
+  /// callbacks should not make changes to the [TabController] since that would
+  /// interfere with the default tap handler.
+  final void Function(int)? onTap;
 
   @override
   Size get preferredSize {
@@ -314,7 +326,10 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
               ),
             ),
             TextButton(
-              onPressed: () => _controller?.animateTo(index),
+              onPressed: () {
+                _controller?.animateTo(index);
+                if (widget.onTap != null) widget.onTap!(index);
+              },
               style: TextButton.styleFrom(
                 minimumSize: Size.fromWidth(48),
                 padding: widget.contentPadding,
