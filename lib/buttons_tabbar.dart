@@ -302,7 +302,8 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
                 color: widget.unselectedBackgroundColor ?? Colors.grey[300]),
         widget.decoration ??
             BoxDecoration(
-                color: widget.backgroundColor ?? Theme.of(context).accentColor),
+                color: widget.backgroundColor ??
+                    Theme.of(context).colorScheme.secondary),
         animationValue);
 
     EdgeInsets buttonMargin = widget.buttonMargin;
@@ -455,6 +456,9 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     final RenderBox tabsContainer =
         _tabsContainerKey.currentContext!.findRenderObject() as RenderBox;
     double screenWidth = tabsContainer.size.width;
+    final tabsContainerPosition = tabsContainer.localToGlobal(Offset.zero).dx;
+    // get the TabsContainer offset (for cases when padding is used)
+    final tabsContainerOffset = Offset(-tabsContainerPosition, 0);
 
     // get the button we want to scroll to
     RenderBox renderBox =
@@ -462,7 +466,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     // get its size
     double size = renderBox.size.width;
     // and position
-    double position = renderBox.localToGlobal(Offset.zero).dx;
+    double position = renderBox.localToGlobal(tabsContainerOffset).dx;
 
     // this is how much the button is away from the center of the screen and how much we must scroll to get it into place
     double offset = (position + size / 2) - screenWidth / 2;
@@ -474,7 +478,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
           .currentContext
           ?.findRenderObject() as RenderBox;
       //// get the position of the first button of the TabBar
-      position = renderBox.localToGlobal(Offset.zero).dx;
+      position = renderBox.localToGlobal(tabsContainerOffset).dx;
 
       // if the offset pulls the first button away from the left side, we limit that movement so the first button is stuck to the left side
       if (!widget.center && position > offset) offset = position;
@@ -486,7 +490,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
           .currentContext
           ?.findRenderObject() as RenderBox;
       // get its position
-      position = renderBox.localToGlobal(Offset.zero).dx;
+      position = renderBox.localToGlobal(tabsContainerOffset).dx;
       // and size
       size = renderBox.size.width;
 

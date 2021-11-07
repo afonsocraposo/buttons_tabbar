@@ -1,3 +1,7 @@
+## [1.3.2] - 07 November 2021
+
+Bug on scrolling when using Padding as parent fixed.
+
 ## [1.3.1] - 26 July 2021
 
 Added `onTap` function to TabBar.

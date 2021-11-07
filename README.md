@@ -16,7 +16,7 @@ Install and import the package. Then just customize its parameters.
 dependencies:
   flutter:
     sdk: flutter
-  buttons_tabbar: ^1.3.1
+  buttons_tabbar: ^1.3.2
 ```
 
 ## Screenshots
