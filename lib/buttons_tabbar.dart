@@ -23,6 +23,7 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.buttonMargin = const EdgeInsets.all(4),
     this.labelSpacing = 4.0,
     this.radius = 7.0,
+    this.elevation = 0,
     this.height = _kTabHeight,
     this.center = false,
     this.onTap,
@@ -116,6 +117,9 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
 
   /// The value of the [BorderRadius.circular] applied to each button.
   final double radius;
+
+  /// The value of the [elevation] applied to each button.
+  final double elevation;
 
   /// Override the default height.
   ///
@@ -297,16 +301,24 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     final Color foregroundColor = textStyle?.color ?? Colors.black;
 
     final BoxDecoration? boxDecoration = BoxDecoration.lerp(
-        widget.unselectedDecoration ??
-            BoxDecoration(
-                color: widget.unselectedBackgroundColor ?? Colors.grey[300]),
-        widget.decoration ??
-            BoxDecoration(
-                color: widget.backgroundColor ??
-                    Theme.of(context).colorScheme.secondary),
+        BoxDecoration(
+          color: widget.unselectedDecoration?.color ??
+              widget.unselectedBackgroundColor ??
+              Colors.grey[300],
+          boxShadow: widget.unselectedDecoration?.boxShadow,
+          gradient: widget.unselectedDecoration?.gradient,
+          borderRadius: BorderRadius.circular(widget.radius),
+        ),
+        BoxDecoration(
+          color: widget.decoration?.color ??
+              widget.backgroundColor ??
+              Theme.of(context).colorScheme.secondary,
+          boxShadow: widget.decoration?.boxShadow,
+          gradient: widget.decoration?.gradient,
+          borderRadius: BorderRadius.circular(widget.radius),
+        ),
         animationValue);
 
-    EdgeInsets buttonMargin = widget.buttonMargin;
     if (index == 0) {
       //
     } else if (index == widget.tabs.length - 1) {
@@ -316,60 +328,56 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     return Padding(
       key: _tabKeys[index],
       // padding for the buttons
-      padding: buttonMargin,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(widget.radius),
-        child: Stack(
-          children: <Widget>[
-            Positioned.fill(
-              child: Container(
-                decoration: boxDecoration,
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                _controller?.animateTo(index);
-                if (widget.onTap != null) widget.onTap!(index);
-              },
-              style: TextButton.styleFrom(
-                minimumSize: Size.fromWidth(48),
-                padding: widget.contentPadding,
-                textStyle: textStyle,
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                shape: RoundedRectangleBorder(
-                  side: (widget.borderWidth == 0)
-                      ? BorderSide.none
-                      : BorderSide(
-                          color: borderColor ?? Colors.black,
-                          width: widget.borderWidth,
-                          style: BorderStyle.solid),
-                  borderRadius: BorderRadius.circular(widget.radius),
-                ),
-              ),
-              child: Row(
-                children: <Widget>[
-                  tab.icon != null
-                      ? IconTheme.merge(
-                          data:
-                              IconThemeData(size: 24.0, color: foregroundColor),
-                          child: tab.icon!)
-                      : Container(),
-                  SizedBox(
-                    width: tab.icon == null ||
-                            (tab.text == null && tab.child == null)
-                        ? 0
-                        : widget.labelSpacing,
+      padding: widget.buttonMargin,
+      child: TextButton(
+        onPressed: () {
+          _controller?.animateTo(index);
+          if (widget.onTap != null) widget.onTap!(index);
+        },
+        style: TextButton.styleFrom(
+          elevation: widget.elevation,
+          minimumSize: Size.fromWidth(48),
+          padding: const EdgeInsets.all(0.0),
+          textStyle: textStyle,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          shape: RoundedRectangleBorder(
+            side: (widget.borderWidth == 0)
+                ? BorderSide.none
+                : BorderSide(
+                    color: borderColor ?? Colors.black,
+                    width: widget.borderWidth,
+                    style: BorderStyle.solid,
                   ),
-                  tab.text != null
-                      ? Text(
-                          tab.text!,
-                          style: textStyle,
-                        )
-                      : (tab.child ?? Container())
-                ],
-              ),
+            borderRadius: BorderRadius.circular(widget.radius),
+          ),
+        ),
+        child: Ink(
+          decoration: boxDecoration,
+          child: Container(
+            padding: widget.contentPadding,
+            alignment: Alignment.center,
+            child: Row(
+              children: <Widget>[
+                tab.icon != null
+                    ? IconTheme.merge(
+                        data: IconThemeData(size: 24.0, color: foregroundColor),
+                        child: tab.icon!)
+                    : Container(),
+                SizedBox(
+                  width: tab.icon == null ||
+                          (tab.text == null && tab.child == null)
+                      ? 0
+                      : widget.labelSpacing,
+                ),
+                tab.text != null
+                    ? Text(
+                        tab.text!,
+                        style: textStyle,
+                      )
+                    : (tab.child ?? Container())
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -397,17 +405,14 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
         builder: (context, child) => SizedBox(
           key: _tabsContainerKey,
           height: widget.preferredSize.height,
-          child: SingleChildScrollView(
+          child: ListView.builder(
+            itemCount: widget.tabs.length,
             physics: widget.physics,
             controller: _scrollController,
             scrollDirection: Axis.horizontal,
             padding: widget.center ? _centerPadding : EdgeInsets.zero,
-            child: Row(
-              children: List.generate(
-                widget.tabs.length,
-                (int index) => _buildButton(index, widget.tabs[index] as Tab),
-              ),
-            ),
+            itemBuilder: (context, int index) =>
+                _buildButton(index, widget.tabs[index] as Tab),
           ),
         ),
       ),

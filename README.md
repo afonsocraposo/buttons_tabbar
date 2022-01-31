@@ -16,7 +16,7 @@ Install and import the package. Then just customize its parameters.
 dependencies:
   flutter:
     sdk: flutter
-  buttons_tabbar: ^1.3.2
+  buttons_tabbar: ^1.3.3
 ```
 
 ## Screenshots
@@ -154,6 +154,7 @@ DefaultTabController(
 | radius                    | `double`        | The value of the `BorderRadius.circular` applied to each button.                                                                         | `7.0`                                   |
 | height                    | `double`        | Override the material TabBar height value.                                                                                               | `46.0`                                  |
 | center                    | `bool`          | Center the tab buttons.                                                                                                                  | `false`                                 |
+| elevation                    | `double`          | The value of `elevation` applied to each button.                                                                                                                  | `0`                                 |
 
 ---
 

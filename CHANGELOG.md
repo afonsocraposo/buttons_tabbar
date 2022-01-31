@@ -1,3 +1,7 @@
+## [1.3.3] - 31 January 2022
+
+Add elevation to buttons and fixed `BoxShadow` problems.
+
 ## [1.3.2] - 07 November 2021
 
 Bug on scrolling when using Padding as parent fixed.
