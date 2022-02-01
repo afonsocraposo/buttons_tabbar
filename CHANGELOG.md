@@ -1,3 +1,7 @@
+## [1.3.4] - 01 February 2022
+
+Possibility to center `ButtonsTabBar` using a parent `Center` widget.
+
 ## [1.3.3] - 31 January 2022
 
 Add elevation to buttons and fixed `BoxShadow` problems.

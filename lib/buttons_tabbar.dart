@@ -405,14 +405,18 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
         builder: (context, child) => SizedBox(
           key: _tabsContainerKey,
           height: widget.preferredSize.height,
-          child: ListView.builder(
-            itemCount: widget.tabs.length,
+          child: SingleChildScrollView(
             physics: widget.physics,
             controller: _scrollController,
             scrollDirection: Axis.horizontal,
             padding: widget.center ? _centerPadding : EdgeInsets.zero,
-            itemBuilder: (context, int index) =>
-                _buildButton(index, widget.tabs[index] as Tab),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: List.generate(
+                widget.tabs.length,
+                (int index) => _buildButton(index, widget.tabs[index] as Tab),
+              ),
+            ),
           ),
         ),
       ),
