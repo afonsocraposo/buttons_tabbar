@@ -1,4 +1,8 @@
-## [1.3.5] - 01 February 2022
+## [1.3.6] - 12 June 2022
+
+Feat: Added splashColor #28
+
+## [1.3.5] - 24 May 2022
 
 Fixed issue #27. Flutter 3.0.0 working.
 

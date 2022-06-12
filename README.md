@@ -16,7 +16,7 @@ Install and import the package. Then just customize its parameters.
 dependencies:
   flutter:
     sdk: flutter
-  buttons_tabbar: ^1.3.5
+  buttons_tabbar: ^1.3.6
 ```
 
 ## Screenshots
@@ -142,6 +142,7 @@ DefaultTabController(
 | unselectedBackgroundColor | `Color`         | The background color of the button on its unselected state.                                                                              | `Colors.grey[300]`                      |
 | decoration                | `BoxDecoration` | The `BoxDecoration` of the button on its selected state.                                                                                 | `null`                                  |
 | unselectedDecoration      | `BoxDecoration` | The `BoxDecoration` of the button on its unselected state.                                                                               | `null`                                  |
+| splashColor           | `Color`         | The splash color of the button                                                                                | `null`         |
 | borderWidth               | `double`        | The with of solid `Border` for each button.                                                                                              | `0`                                     |
 | borderColor               | `Color`         | The border color of the button on its selected state.                                                                                    | `Colors.black`                          |
 | unselectedBorderColor     | `Color`         | The border color of the button on its unselected state. If it's value is `null`, the `Color` of `borderColor` is used.                   | `null`                                  |

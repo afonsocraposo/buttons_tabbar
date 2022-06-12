@@ -15,6 +15,7 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.unselectedDecoration,
     this.labelStyle,
     this.unselectedLabelStyle,
+    this.splashColor,
     this.borderWidth = 0,
     this.borderColor = Colors.black,
     this.unselectedBorderColor = Colors.black,
@@ -56,6 +57,11 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
   ///
   /// If [Color] is not provided, [Colors.grey[300]] is used.
   final Color? unselectedBackgroundColor;
+
+  /// The splash [Color] of the button.
+  ///
+  /// If [Color] is not provided, the default is used.
+  final Color? splashColor;
 
   /// The [BoxDecoration] of the button on its selected state.
   ///
@@ -156,13 +162,13 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     with TickerProviderStateMixin {
   TabController? _controller;
 
-  ScrollController _scrollController = new ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   late AnimationController _animationController;
 
   late List<GlobalKey> _tabKeys;
-  GlobalKey _tabsContainerKey = GlobalKey();
-  GlobalKey _tabsParentKey = GlobalKey();
+  final GlobalKey _tabsContainerKey = GlobalKey();
+  final GlobalKey _tabsParentKey = GlobalKey();
 
   int _currentIndex = 0;
   int _prevIndex = -1;
@@ -285,16 +291,17 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     Tab tab,
   ) {
     final double animationValue;
-    if (index == _currentIndex)
+    if (index == _currentIndex) {
       animationValue = _animationController.value;
-    else if (index == _prevIndex)
+    } else if (index == _prevIndex) {
       animationValue = 1 - _animationController.value;
-    else
+    } else {
       animationValue = 0;
+    }
 
     final TextStyle? textStyle = TextStyle.lerp(
-        widget.unselectedLabelStyle ?? TextStyle(color: Colors.black),
-        widget.labelStyle ?? TextStyle(color: Colors.white),
+        widget.unselectedLabelStyle ?? const TextStyle(color: Colors.black),
+        widget.labelStyle ?? const TextStyle(color: Colors.white),
         animationValue);
     final Color? borderColor = Color.lerp(
         widget.unselectedBorderColor, widget.borderColor, animationValue);
@@ -334,23 +341,25 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
           _controller?.animateTo(index);
           if (widget.onTap != null) widget.onTap!(index);
         },
-        style: TextButton.styleFrom(
-          elevation: widget.elevation,
-          minimumSize: Size.fromWidth(48),
-          padding: const EdgeInsets.all(0.0),
-          textStyle: textStyle,
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          shape: RoundedRectangleBorder(
-            side: (widget.borderWidth == 0)
-                ? BorderSide.none
-                : BorderSide(
-                    color: borderColor ?? Colors.black,
-                    width: widget.borderWidth,
-                    style: BorderStyle.solid,
-                  ),
-            borderRadius: BorderRadius.circular(widget.radius),
-          ),
-        ),
+        style: ButtonStyle(
+            elevation: MaterialStateProperty.all(widget.elevation),
+            minimumSize: MaterialStateProperty.all(const Size(40, 40)),
+            padding: MaterialStateProperty.all(EdgeInsets.zero),
+            textStyle: MaterialStateProperty.all(textStyle),
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                side: (widget.borderWidth == 0)
+                    ? BorderSide.none
+                    : BorderSide(
+                        color: borderColor ?? Colors.black,
+                        width: widget.borderWidth,
+                        style: BorderStyle.solid,
+                      ),
+                borderRadius: BorderRadius.circular(widget.radius),
+              ),
+            ),
+            overlayColor: MaterialStateProperty.all(widget.splashColor)),
         child: Ink(
           decoration: boxDecoration,
           child: Container(
@@ -507,14 +516,15 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       if (position + size < screenWidth) screenWidth = position + size;
 
       // if the offset pulls the last button away from the right side limit, we reduce that movement so the last button is stuck to the right side limit
-      if (!widget.center && position + size - offset < screenWidth)
+      if (!widget.center && position + size - offset < screenWidth) {
         offset = position + size - screenWidth;
+      }
     }
     offset *= (_textLTR ? 1 : -1);
 
     // scroll the calculated ammount
     _scrollController.animateTo(offset + _scrollController.offset,
-        duration: new Duration(milliseconds: widget.duration),
+        duration: Duration(milliseconds: widget.duration),
         curve: Curves.easeInOut);
   }
 }
