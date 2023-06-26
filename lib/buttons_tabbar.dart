@@ -314,7 +314,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
               Colors.grey[300],
           boxShadow: widget.unselectedDecoration?.boxShadow,
           gradient: widget.unselectedDecoration?.gradient,
-          borderRadius: BorderRadius.circular(widget.radius),
+          borderRadius: widget.unselectedDecoration?.borderRadius ?? BorderRadius.circular(widget.radius),
         ),
         BoxDecoration(
           color: widget.decoration?.color ??
@@ -322,7 +322,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
               Theme.of(context).colorScheme.secondary,
           boxShadow: widget.decoration?.boxShadow,
           gradient: widget.decoration?.gradient,
-          borderRadius: BorderRadius.circular(widget.radius),
+          borderRadius: widget.decoration?.borderRadius ?? BorderRadius.circular(widget.radius),
         ),
         animationValue);
 

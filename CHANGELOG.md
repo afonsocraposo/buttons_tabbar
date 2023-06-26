@@ -1,3 +1,9 @@
+# CHANGELOG
+
+## [1.3.7] - 26 June 2023
+
+Feat: Parse `borderRadius` from `BoxDecoration`
+
 ## [1.3.6] - 12 June 2022
 
 Feat: Added splashColor #28
