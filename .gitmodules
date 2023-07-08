@@ -1,0 +1,4 @@
+[submodule "doc/api"]
+	path = doc/api
+	url = git@github.com:afonsocraposo/buttons_tabbar.git
+	branch = gh-pages

@@ -19,13 +19,15 @@ jobs:
         run: flutter pub get
 
       - name: Generate API reference documentation
-        run: dart doc -o docs
+        run: dart doc
         
       - uses: EndBug/add-and-commit@v9
         with:
-          add: 'docs'
-          default_author: github_actions
-          new_branch: main
+          add: 'doc'
+          cwd: 'doc/api'
+          default_author: 'github_actions'
+          message: 'Generate API reference documentation'
+          push: 'origin gh-pages --force'
 
   publish:
     runs-on: ubuntu-latest
