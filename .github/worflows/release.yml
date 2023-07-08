@@ -1,0 +1,49 @@
+on:
+  #pull_request: #ODO: remove
+  push:
+    branches:
+      - main
+      - release
+      - 'releases/**'
+    
+    paths:
+      - 'release-info.md'
+
+name: Release
+
+env:
+  working-directory: .
+
+jobs:
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: HannesGitH/flutter-shut-the-box/.github/actions/setup@main
+      - name: run tests and report coverage
+        run: flutter test --coverage
+      - name: comment coverage
+        if: github.event.pull_request
+        uses: romeovs/lcov-reporter-action@v0.2.16 
+        with:
+          github-token: ${{secrets.TOKEN_GITHUB}}
+
+  build-doc:
+    needs: test
+    name: Build Docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: HannesGitH/flutter-shut-the-box/.github/actions/setup@main
+      - name: Build Documentation
+        run: |
+          flutter pub global activate dartdoc
+          flutter pub global run dartdoc
+      - name: upload doc artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: doc
+          path: ${{ env.working-directory}}/doc/api
