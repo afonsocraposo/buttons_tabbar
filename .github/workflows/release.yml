@@ -19,11 +19,11 @@ jobs:
         run: flutter pub get
 
       - name: Generate API reference documentation
-        run: dart doc
+        run: dart doc -o docs
         
       - uses: EndBug/add-and-commit@v9
         with:
-          add: 'doc/api --force'
+          add: 'docs'
           default_author: github_actions
           new_branch: main
 

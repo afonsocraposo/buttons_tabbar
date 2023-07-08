@@ -4,7 +4,7 @@
 
 Buttons TabBar is an open-source Flutter package that provides a tabbar where each tab indicator is a toggle button. It allows you to create interactive and customizable tab bars for your Flutter applications.
 
-![ButtonsTabBar screen animation](https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/screen2.gif)
+![ButtonsTabBar screen animation](https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/docsscreenshots/screen2.gif)
 
 ## Features
 
@@ -73,7 +73,7 @@ Here are a few examples of how you can use Buttons TabBar:
 
 #### Example #1
 
-![ButtonsTabBar - Example #1](https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/example1.jpg)
+![ButtonsTabBar - Example #1](https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/docsscreenshots/example1.jpg)
 
 ```dart
 DefaultTabController(
@@ -96,7 +96,7 @@ DefaultTabController(
 
 #### Example #2
 
-![ButtonsTabBar - Example #2](https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/example2.jpg)
+![ButtonsTabBar - Example #2](https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/docsscreenshots/example2.jpg)
 
 ```dart
 DefaultTabController(
@@ -131,7 +131,7 @@ DefaultTabController(
 
 #### Example #3
 
-![ButtonsTabBar - Example #3](https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/example3.jpg)
+![ButtonsTabBar - Example #3](https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/docsscreenshots/example3.jpg)
 
 ```dart
 DefaultTabController(
