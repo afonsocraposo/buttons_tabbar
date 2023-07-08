@@ -8,30 +8,30 @@ env:
   working-directory: .
   
 jobs:
-  build:
+  build-docs:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
-
-      # Note: This workflow uses the latest stable version of the Dart SDK.
-      # You can specify other versions if desired, see documentation here:
-      # https://github.com/dart-lang/setup-dart/blob/main/README.md
-      # - uses: dart-lang/setup-dart@v1
-      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
+      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
 
       - name: Install dependencies
-        run: dart pub get
+        run: flutter pub get
 
       - name: Generate API reference documentation
         run: dart doc
         
-      - name: Upload doc artifact
-        uses: actions/upload-artifact@v2
+      - uses: EndBug/add-and-commit@v9
         with:
-          name: doc
-          path: ${{ env.working-directory}}/doc/api
+          add: 'doc/api'
+          default_author: github_actions
+
   publish:
-    permissions:
-      id-token: write # Required for authentication using OIDC
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Publish
+        uses: sakebook/actions-flutter-pub-publisher@v1.4.1
+        with:
+          credential: ${{ secrets.CREDENTIAL_JSON }}
