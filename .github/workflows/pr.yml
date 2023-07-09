@@ -1,0 +1,49 @@
+name: Verify version and changelog
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if version was incremented
+        id: check_version
+        run: |
+          git fetch origin ${{ github.base_ref }}:$GITHUB_SHA
+          CHANGED_FILES=$(git diff --name-only $GITHUB_SHA ${{ github.sha }})
+
+          if [[ "$CHANGED_FILES" == *"pubspec.yaml" ]]; then
+            VERSION_DIFF=$(git diff --unified=0 $GITHUB_SHA ${{ github.sha }} -- pubspec.yaml | grep -oE "^\+[[:space:]]*version:[[:space:]]*[0-9.]+")
+            if [[ -z "$VERSION_DIFF" ]]; then
+              echo "::error::Version number not incremented"
+              exit 1
+            fi
+          fi
+      - name: Check if changelog entry exists
+        id: check_changelog
+        run: |
+          CHANGELOG_DIFF=$(git diff --unified=0 $GITHUB_SHA ${{ github.sha }} -- CHANGELOG.md)
+          VERSION_NUMBER=$(grep -oP "version: \K[0-9]+\.[0-9]+\.[0-9]+" pubspec.yaml)
+
+          if [[ -z "$VERSION_NUMBER" ]]; then
+            echo "::error::Version number not found in <your_yaml_file>.yaml"
+            exit 1
+          fi
+
+          VERSION_LINE=$(grep -n "## \[$VERSION_NUMBER\]" CHANGELOG.md | cut -d ':' -f 1)
+
+          if [[ -z "$VERSION_LINE" ]]; then
+            echo "::error::$VERSION_NUMBER entry not found in CHANGELOG.md"
+            exit 1
+          fi
+
+          CHANGELOG_ENTRY=$(echo "$CHANGELOG_DIFF" | grep -A1 -e "## \[$VERSION_NUMBER\]" | grep -v "## \[$VERSION_NUMBER\]")
+          if [[ -z "$CHANGELOG_ENTRY" ]]; then
+            echo "::error::$VERSION_NUMBER entry missing details in CHANGELOG.md"
+            exit 1
+          fi

@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## [1.3.7+3] - 9 July 2023
+## [1.3.7+4] - 9 July 2023
+
+Feat: Add GH workflow for PR
+
+## [1.3.7+3] - 8 July 2023
 
 Feat: Add CI/CD workflow
 
