@@ -2,96 +2,136 @@
 
 [![Pub](https://img.shields.io/pub/v/buttons_tabbar.svg)](https://pub.dev/packages/buttons_tabbar)
 
-Open source Flutter package, tabbar where each tab indicator is a toggle button.
+Buttons TabBar is an open-source Flutter package that provides a tabbar where each tab indicator is a toggle button. It allows you to create interactive and customizable tab bars for your Flutter applications.
 
-Made by [Afonso Raposo](https://afonsoraposo.com).
+![ButtonsTabBar screen animation](https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/screen2.gif)
 
-See the full example [here](https://github.com/Afonsocraposo/buttons_tabbar/tree/master/example/example.dart)
+## Features
 
-Install and import the package. Then just customize its parameters.
+✨ Each tab indicator is a toggle button  
+🎨 Customizable appearance and behavior  
+🖌️ Supports various styling options, including background color, border color, label style, icon color, and more  
+🚀 Smooth transition animations  
+📱 Works like a native TabBar  
+⚙️ Simple and easy to use configuration with a wide range of parameters
 
 ## Installation
+
+To use Buttons TabBar in your Flutter project, follow these steps:
+
+1. Add the dependency to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
   flutter:
     sdk: flutter
-  buttons_tabbar: ^1.3.7
+  buttons_tabbar: ^1.3.7+1
 ```
 
-## Screenshots
+2. Run `flutter pub get` to install the package.
 
-#### Default
+## Usage
 
-<img src="https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/screen1.jpg" alt="ButtonsTabBar screen" width="400" />
-<br>
-<img src="https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/screen2.gif" alt="ButtonsTabBar screen animation" width="400" />
+Import the package in your Dart file and customize the tab bar according to your needs:
 
----
+```dart
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 
-## ButtonsTabBar - Examples
+DefaultTabController(
+  length: ...,
+  child: Column(
+    children: <Widget>[
+      ButtonsTabBar(
+        // Customize the appearance and behavior of the tab bar
+        backgroundColor: Colors.red,
+        borderWidth: 2,
+        borderColor: Colors.black,
+        labelStyle: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+        unselectedLabelStyle: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+        ),
+        // Add your tabs here
+        tabs: ...,
+      ),
+      Expanded(
+        child: TabBarView(
+          children: ...,
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+## Examples
+
+Here are a few examples of how you can use Buttons TabBar:
 
 #### Example #1
 
-<img src="https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/example1.jpg" alt="ButtonsTabBar - Example #1" width="400" />
-<br>
+![ButtonsTabBar - Example #1](https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/example1.jpg)
 
 ```dart
 DefaultTabController(
-          length: ...,
-          child: Column(
-            children: <Widget>[
-              ButtonsTabBar(
-                backgroundColor: Colors.red,
-                tabs: ...,
-              ),
-              Expanded(
-                child: TabBarView(
-                  children: ...,
-                ),
-              ),
-            ],
-          ),
-        )
-
+  length: ...,
+  child: Column(
+    children: <Widget>[
+      ButtonsTabBar(
+        backgroundColor: Colors.red,
+        tabs: ...,
+      ),
+      Expanded(
+        child: TabBarView(
+          children: ...,
+        ),
+      ),
+    ],
+  ),
+)
 ```
 
 #### Example #2
 
-<img src="https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/example2.jpg" alt="ButtonsTabBar - Example #2" width="400" />
-<br>
+![ButtonsTabBar - Example #2](https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/example2.jpg)
 
 ```dart
 DefaultTabController(
-          length: ...,
-          child: Column(
-            children: <Widget>[
-              ButtonsTabBar(
-                backgroundColor: Colors.blue[600],
-                unselectedBackgroundColor: Colors.white,
-                labelStyle:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-		unselectedLabelStyle: TextStyle(
-                    color: Colors.blue[600], fontWeight: FontWeight.bold),
-                borderWidth: 1,
-                unselectedBorderColor: Colors.blue[600],
-                radius: 100,
-                tabs: ...,
-              ),
-              Expanded(
-                child: TabBarView(
-                  children: ...,
-                ),
-              ),
-            ],
-          ),
-        )
+  length: ...,
+  child: Column(
+    children: <Widget>[
+      ButtonsTabBar(
+        backgroundColor: Colors.blue[600],
+        unselectedBackgroundColor: Colors.white,
+        labelStyle: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+        unselectedLabelStyle: TextStyle(
+          color: Colors.blue[600],
+          fontWeight: FontWeight.bold,
+        ),
+        borderWidth: 1,
+        unselectedBorderColor: Colors.blue[600],
+        radius: 100,
+        tabs: ...,
+      ),
+      Expanded(
+        child: TabBarView(
+          children: ...,
+        ),
+      ),
+    ],
+  ),
+)
 ```
 
 #### Example #3
 
-<img src="https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/example3.jpg" alt="ButtonsTabBar - Example #3" width="400" />
-<br>
+![ButtonsTabBar - Example #3](https://raw.githubusercontent.com/Afonsocraposo/buttons_tabbar/master/doc/screenshots/example3.jpg)
 
 ```dart
 DefaultTabController(
@@ -128,41 +168,56 @@ DefaultTabController(
 )
 ```
 
+For more examples, please refer to the [example.dart](https://github.com/Afonsocraposo/buttons_tabbar/tree/master/example/example.dart) file.
 
----
+## Properties
 
-## ButtonsTabBar Parameters
+Below are the properties available for customizing the ButtonsTabBar. For more detailed information, check the [API reference]().
 
-| Parameter                 | Type            | Description                                                                                                                              | Default                                 |
-| ------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| **tabs**                  | `List<Widget>`  | The tabs to display. Typically a list of two or more `Tab` widgets.                                                                      | **`@required`**                         |
-| controller                | `TabController` | This widget's selection and animation state.                                                                                             | `DefaultTabController.of`               |
-| duration                  | `int`           | The duration in milliseconds of the transition animation.                                                                                | `250`                                   |
-| backgroundColor           | `Color`         | The background color of the button on its selected state.                                                                                | `Theme.of(context).accentColor`         |
-| unselectedBackgroundColor | `Color`         | The background color of the button on its unselected state.                                                                              | `Colors.grey[300]`                      |
-| decoration                | `BoxDecoration` | The `BoxDecoration` of the button on its selected state.                                                                                 | `null`                                  |
-| unselectedDecoration      | `BoxDecoration` | The `BoxDecoration` of the button on its unselected state.                                                                               | `null`                                  |
-| splashColor           | `Color`         | The splash color of the button                                                                                | `null`         |
-| borderWidth               | `double`        | The with of solid `Border` for each button.                                                                                              | `0`                                     |
-| borderColor               | `Color`         | The border color of the button on its selected state.                                                                                    | `Colors.black`                          |
-| unselectedBorderColor     | `Color`         | The border color of the button on its unselected state. If it's value is `null`, the `Color` of `borderColor` is used.                   | `null`                                  |
-| labelStyle                | `TextStyle`     | The `TextStyle` of the button's `Text` on its selected state. The color provided on the TextStyle will be used for the `Icon`'s color.   | `TextStyle(color: Colors.white)`        |
-| unselectedLabelStyle      | `TextStyle`     | The `TextStyle` of the button's `Text` on its unselected state. The color provided on the TextStyle will be used for the `Icon`'s color. | `TextStyle(color: Colors.black)`        |
-| physics                   | `ScrollPhysics` | The physics used for the `ScrollController`of the tabs list.                                                                             | `BouncingScrollPhysics`                 |
-| contentPadding            | `EdgeInsets`    | The `EdgeInsets` used for the `Padding` of the buttons' content.                                                                         | `EdgeInsets.symmetric(horizontal: 4.0)` |
-| buttonMargin              | `EdgeInsets`    | The `EdgeInsets` used for the `Margin` of the buttons.                                                                                   | `EdgeInsets.all(4.0)`                   |
-| labelSpacing              | `double`        | The spacing between the `Icon` and the `Text`. If only one of those is provided, no spacing is applied.                                  | `4.0`                                   |
-| radius                    | `double`        | The value of the `BorderRadius.circular` applied to each button.                                                                         | `7.0`                                   |
-| height                    | `double`        | Override the material TabBar height value.                                                                                               | `46.0`                                  |
-| center                    | `bool`          | Center the tab buttons.                                                                                                                  | `false`                                 |
-| elevation                    | `double`          | The value of `elevation` applied to each button.                                                                                                                  | `0`                                 |
+| Property                   | Type              | Description                                                                                                                              | Default                                 |
+| -------------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| backgroundColor            | `Color`           | The background color of the button on its selected state.                                                                                | `Theme.of(context).accentColor`         |
+| borderColor                | `Color`           | The border color of the button on its selected state.                                                                                    | `Colors.black`                          |
+| borderWidth                | `double`          | The width of the solid border for each button.                                                                                           | `0`                                     |
+| buttonMargin               | `EdgeInsets`      | The `EdgeInsets` used for the margin of the buttons.                                                                                     | `EdgeInsets.all(4.0)`                   |
+| center                     | `bool`            | Center the tab buttons.                                                                                                                  | `false`                                 |
+| contentPadding             | `EdgeInsets`      | The `EdgeInsets` used for the padding of the buttons' content.                                                                           | `EdgeInsets.symmetric(horizontal: 4.0)` |
+| controller                 | `TabController`   | This widget's selection and animation state.                                                                                             | `DefaultTabController.of`               |
+| decoration                 | `BoxDecoration`   | The `BoxDecoration` of the button on its selected state.                                                                                 | `null`                                  |
+| duration                   | `int`             | The duration in milliseconds of the transition animation.                                                                                | `250`                                   |
+| elevation                  | `double`          | The value of elevation applied to each button.                                                                                           | `0`                                     |
+| height                     | `double?`         | Override the default height.                                                                                                            | `46.0`                                  |
+| labelSpacing               | `double`          | The spacing between the icon and the text. If only one of those is provided, no spacing is applied.                                      | `4.0`                                   |
+| labelStyle                 | `TextStyle`       | The `TextStyle` of the button's text on its selected state. The color provided on the TextStyle will be used for the icon's color.       | `TextStyle(color: Colors.white)`        |
+| onTap                      | `void Function(int)?` | An optional callback that's called when the TabBar is tapped.                                                                            | `null`                                  |
+| physics                    | `ScrollPhysics`   | The physics used for the `ScrollController` of the tabs list.                                                                            | `BouncingScrollPhysics()`               |
+| radius                     | `double`          | The value of the `BorderRadius.circular` applied to each button.                                                                         | `7.0`                                   |
+| splashColor                | `Color?`          | The splash color of the button.                                                                                                         | `null`                                  |
+| tabs                       | `List<Widget>`    | The tabs to display. Typically a list of two or more `Tab` widgets.                                                                      | **`@required`**                         |
+| unselectedBackgroundColor  | `Color`           | The background color of the button on its unselected state.                                                                              | `Colors.grey[300]`                      |
+| unselectedBorderColor      | `Color`           | The border color of the button on its unselected state. If it's value is `null`, the `Color` of `borderColor` is used.                   | `null`                                  |
+| unselectedDecoration       | `BoxDecoration`   | The `BoxDecoration` of the button on its unselected state.                                                                               | `null`                                  |
+| unselectedLabelStyle       | `TextStyle`       | The `TextStyle` of the button's text on its unselected state. The color provided on the TextStyle will be used for the icon's color.     | `TextStyle(color: Colors.black)`        |
 
----
+## Apps Using Buttons TabBar
 
-## Future
+Here are some apps that are using Buttons TabBar to create engaging and interactive tab bars:
 
-If you have any suggestion or problem, let me know and I'll try to improve or fix it.
+1. [Spotube](https://github.com/KRTirtho/spotube) - Open source Spotify client that doesn't require Premium nor uses Electron! Available for both desktop & mobile!
+![Spotube](https://github.com/KRTirtho/spotube/raw/master/assets/spotube-screenshot.png)
+
+If you are using Buttons TabBar in your app and would like to showcase it here, please let us know. We would be happy to feature your app as well.
+
+Please note that the above apps are provided as examples and may not be actively maintained or associated with the Buttons TabBar package.
+
+## Future Development
+
+If you have any suggestions or encounter any issues, feel free to let me know. I am committed to improving and maintaining this package.
 
 ## License
 
-GNU General Public License v3.0, see the [LICENSE.md](https://github.com/Afonsocraposo/buttons_tabbar/tree/master/LICENSE) file for details.
+This package is licensed under the MIT License. For more information, see the [LICENSE.md](https://github.com/Afonsocraposo/buttons_tabbar/tree/master/LICENSE) file.
+
+## More Information
+
+For more information, visit the [Buttons TabBar GitHub repository](https://github.com/Afonsocraposo/buttons_tabbar) or [the author's website](https://afonsoraposo.com).

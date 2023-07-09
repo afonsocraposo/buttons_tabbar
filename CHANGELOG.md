@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [1.3.7+1] - 9 July 2023
+
+Feat: Add CI/CD workflow
+
 ## [1.3.7] - 26 June 2023
 
 Feat: Parse `borderRadius` from `BoxDecoration`
