@@ -24,6 +24,7 @@ jobs:
               exit 1
             fi
           fi
+
       - name: Check if changelog entry exists
         id: check_changelog
         run: |
@@ -47,3 +48,12 @@ jobs:
             echo "::error::$VERSION_NUMBER entry missing details in CHANGELOG.md"
             exit 1
           fi
+
+      - name: Set pull request status
+        if: ${{ failure() }}
+        uses: peter-evans/create-pull-request-status@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          state: failure
+          description: Version or changelog checks failed
+          context: Verify Version and Changelog
