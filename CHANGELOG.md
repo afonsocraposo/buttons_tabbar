@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [1.3.7+5] - 9 July 2023
+
+Feat: Improve GH workflow for PR
+
 ## [1.3.7+4] - 9 July 2023
 
 Feat: Add GH workflow for PR
