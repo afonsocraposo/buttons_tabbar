@@ -1,12 +1,10 @@
 name: Release
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
 
-env:
-  working-directory: .
-  
 jobs:
   build-docs:
     runs-on: ubuntu-latest
@@ -21,21 +19,20 @@ jobs:
       - name: Generate API reference documentation
         run: dart doc
         
-      - uses: EndBug/add-and-commit@v9
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
         with:
-          add: 'doc'
-          cwd: 'doc/api'
-          default_author: 'github_actions'
-          message: 'Generate API reference documentation'
-          push: 'origin gh-pages --force'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./doc/api
 
-  publish:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Publish
-        uses: sakebook/actions-flutter-pub-publisher@v1.4.1
-        with:
-          credential: ${{ secrets.CREDENTIAL_JSON }}
-          skip_test: true
+  # publish:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v1
+  #     - name: Publish
+  #       uses: sakebook/actions-flutter-pub-publisher@v1.4.1
+  #       with:
+  #         credential: ${{ secrets.CREDENTIAL_JSON }}
+  #         skip_test: true
