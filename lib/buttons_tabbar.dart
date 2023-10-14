@@ -326,16 +326,34 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
         ),
         animationValue);
 
+    var margin = EdgeInsets.only(
+      top: widget.buttonMargin.top,
+      bottom: widget.buttonMargin.bottom,
+      left: widget.buttonMargin.left / 2,
+      right: widget.buttonMargin.right / 2,
+    );
+
     if (index == 0) {
-      //
+      margin = EdgeInsets.only(
+        top: widget.buttonMargin.top,
+        bottom: widget.buttonMargin.bottom,
+        left: widget.buttonMargin.left,
+        right: widget.buttonMargin.right / 2,
+      );
     } else if (index == widget.tabs.length - 1) {
-      //
+      margin = EdgeInsets.only(
+        top: widget.buttonMargin.top,
+        bottom: widget.buttonMargin.bottom,
+        right: widget.buttonMargin.right,
+        left: widget.buttonMargin.left / 2,
+      );
     }
+
 
     return Padding(
       key: _tabKeys[index],
       // padding for the buttons
-      padding: widget.buttonMargin,
+      padding: margin,
       child: TextButton(
         onPressed: () {
           _controller?.animateTo(index);
