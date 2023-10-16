@@ -1,7 +1,7 @@
 # CHANGELOG
 
 
-## [1.3.7+2] - 16 October 2023
+## [1.3.8] - 16 October 2023
 
 Ref: fix button spacing issue
 
