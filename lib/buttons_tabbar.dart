@@ -326,12 +326,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
         ),
         animationValue);
 
-    var margin = EdgeInsets.only(
-      top: widget.buttonMargin.top,
-      bottom: widget.buttonMargin.bottom,
-      left: widget.buttonMargin.left / 2,
-      right: widget.buttonMargin.right / 2,
-    );
+    EdgeInsets margin;
 
     if (index == 0) {
       margin = EdgeInsets.only(
@@ -346,6 +341,13 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
         bottom: widget.buttonMargin.bottom,
         right: widget.buttonMargin.right,
         left: widget.buttonMargin.left / 2,
+      );
+    } else {
+      margin = EdgeInsets.only(
+        top: widget.buttonMargin.top,
+        bottom: widget.buttonMargin.bottom,
+        left: widget.buttonMargin.left / 2,
+        right: widget.buttonMargin.right / 2,
       );
     }
 
