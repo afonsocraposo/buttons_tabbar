@@ -1,5 +1,10 @@
 # CHANGELOG
 
+
+## [1.3.7+2] - 16 October 2023
+
+Ref: fix button spacing issue
+
 ## [1.3.7+1] - 9 July 2023
 
 Feat: Add CI/CD workflow
