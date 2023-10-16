@@ -49,8 +49,12 @@
 </header>
 <main>
 
-  <div id="dartdoc-main-content" class="main-content">
-    
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar=""
+      data-below-sidebar="buttons_tabbar&#47;buttons_tabbar-library-sidebar.html">
+      
       <div>
 <h1><span class="kind-library">buttons_tabbar</span> library 
  
@@ -85,15 +89,16 @@
   </div> <!-- /.main-content -->
 
   <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
-    <header id="header-search-sidebar" class="hidden-l">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
   <form class="search-sidebar" role="search">
     <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
 </header>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
-  <li><a href="../index.html">buttons_tabbar</a></li>
-  <li class="self-crumb">buttons_tabbar library</li>
+    <li><a href="../index.html">buttons_tabbar</a></li>
+    <li class="self-crumb">buttons_tabbar library</li>
 </ol>
 
 
@@ -107,19 +112,6 @@
 
   <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
     <h5>buttons_tabbar library</h5>
-    <ol>
-      <li class="section-title"><a href="../buttons_tabbar/buttons_tabbar-library.html#classes">Classes</a></li>
-        <li><a href="../buttons_tabbar/ButtonsTabBar-class.html">ButtonsTabBar</a></li>
-
-
-
-
-
-
-
-
-</ol>
-
   </div><!--/sidebar-offcanvas-right-->
 
 </main>
@@ -127,7 +119,7 @@
 <footer>
   <span class="no-break">
     buttons_tabbar
-      1.3.7+1
+      1.3.8
   </span>
 
   
