@@ -28,6 +28,8 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.height = _kTabHeight,
     this.center = false,
     this.onTap,
+    this.onSwipe,
+
   }) : super(key: key) {
     assert(backgroundColor == null || decoration == null);
     assert(unselectedBackgroundColor == null || unselectedDecoration == null);
@@ -147,6 +149,7 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
   /// callbacks should not make changes to the [TabController] since that would
   /// interfere with the default tap handler.
   final void Function(int)? onTap;
+  final void Function(int)? onSwipe;
 
   @override
   Size get preferredSize {
@@ -476,6 +479,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     setState(() {
       _prevIndex = _currentIndex;
       _currentIndex = index;
+      widget.onSwipe?.call(index);
     });
     _scrollTo(index); // scroll TabBar if needed
     _triggerAnimation();
