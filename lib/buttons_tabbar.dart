@@ -27,6 +27,7 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.elevation = 0,
     this.height = _kTabHeight,
     this.center = false,
+    this.alignment = MainAxisAlignment.start,
     this.onTap,
   }) : super(key: key) {
     assert(backgroundColor == null || decoration == null);
@@ -136,6 +137,8 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
 
   /// Center the tab buttons
   final bool center;
+
+  final MainAxisAlignment alignment;
 
   /// An optional callback that's called when the [TabBar] is tapped.
   ///
@@ -314,7 +317,8 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
               Colors.grey[300],
           boxShadow: widget.unselectedDecoration?.boxShadow,
           gradient: widget.unselectedDecoration?.gradient,
-          borderRadius: widget.unselectedDecoration?.borderRadius ?? BorderRadius.circular(widget.radius),
+          borderRadius: widget.unselectedDecoration?.borderRadius ??
+              BorderRadius.circular(widget.radius),
         ),
         BoxDecoration(
           color: widget.decoration?.color ??
@@ -322,7 +326,8 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
               Theme.of(context).colorScheme.secondary,
           boxShadow: widget.decoration?.boxShadow,
           gradient: widget.decoration?.gradient,
-          borderRadius: widget.decoration?.borderRadius ?? BorderRadius.circular(widget.radius),
+          borderRadius: widget.decoration?.borderRadius ??
+              BorderRadius.circular(widget.radius),
         ),
         animationValue);
 
@@ -350,7 +355,6 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
         right: widget.buttonMargin.right / 2,
       );
     }
-
 
     return Padding(
       key: _tabKeys[index],
@@ -440,6 +444,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
             scrollDirection: Axis.horizontal,
             padding: widget.center ? _centerPadding : EdgeInsets.zero,
             child: Row(
+              mainAxisAlignment: widget.alignment,
               mainAxisSize: MainAxisSize.min,
               children: List.generate(
                 widget.tabs.length,
