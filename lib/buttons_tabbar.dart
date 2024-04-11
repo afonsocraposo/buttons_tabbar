@@ -28,6 +28,7 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.height = _kTabHeight,
     this.center = false,
     this.alignment = MainAxisAlignment.start,
+    this.alignmentSize = MainAxisSize.min,
     this.onTap,
   }) : super(key: key) {
     assert(backgroundColor == null || decoration == null);
@@ -139,6 +140,8 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
   final bool center;
 
   final MainAxisAlignment alignment;
+
+  final MainAxisSize alignmentSize;
 
   /// An optional callback that's called when the [TabBar] is tapped.
   ///
@@ -445,7 +448,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
             padding: widget.center ? _centerPadding : EdgeInsets.zero,
             child: Row(
               mainAxisAlignment: widget.alignment,
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: widget.alignmentSize,
               children: List.generate(
                 widget.tabs.length,
                 (int index) => _buildButton(index, widget.tabs[index] as Tab),
