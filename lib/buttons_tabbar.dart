@@ -29,6 +29,7 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.center = false,
     this.alignment = MainAxisAlignment.start,
     this.alignmentSize = MainAxisSize.min,
+    this.useScrollView = true,
     this.onTap,
   }) : super(key: key) {
     assert(backgroundColor == null || decoration == null);
@@ -142,6 +143,7 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
   final MainAxisAlignment alignment;
 
   final MainAxisSize alignmentSize;
+  final bool useScrollView;
 
   /// An optional callback that's called when the [TabBar] is tapped.
   ///
@@ -438,24 +440,34 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       child: AnimatedBuilder(
         animation: _animationController,
         key: _tabsParentKey,
-        builder: (context, child) => SizedBox(
-          key: _tabsContainerKey,
-          height: widget.preferredSize.height,
-          child: SingleChildScrollView(
-            physics: widget.physics,
-            controller: _scrollController,
-            scrollDirection: Axis.horizontal,
-            padding: widget.center ? _centerPadding : EdgeInsets.zero,
-            child: Row(
-              mainAxisAlignment: widget.alignment,
-              mainAxisSize: widget.alignmentSize,
-              children: List.generate(
-                widget.tabs.length,
-                (int index) => _buildButton(index, widget.tabs[index] as Tab),
+        builder: (context, child) => widget.useScrollView
+            ? SizedBox(
+                key: _tabsContainerKey,
+                height: widget.preferredSize.height,
+                child: SingleChildScrollView(
+                  physics: widget.physics,
+                  controller: _scrollController,
+                  scrollDirection: Axis.horizontal,
+                  padding: widget.center ? _centerPadding : EdgeInsets.zero,
+                  child: Row(
+                    mainAxisAlignment: widget.alignment,
+                    mainAxisSize: widget.alignmentSize,
+                    children: List.generate(
+                      widget.tabs.length,
+                      (int index) =>
+                          _buildButton(index, widget.tabs[index] as Tab),
+                    ),
+                  ),
+                ),
+              )
+            : Row(
+                mainAxisAlignment: widget.alignment,
+                mainAxisSize: widget.alignmentSize,
+                children: List.generate(
+                  widget.tabs.length,
+                  (int index) => _buildButton(index, widget.tabs[index] as Tab),
+                ),
               ),
-            ),
-          ),
-        ),
       ),
     );
   }
