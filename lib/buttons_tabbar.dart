@@ -207,7 +207,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
   }
 
   void _updateTabController() {
-    final TabController? newController =
+    final TabController newController =
         widget.controller ?? DefaultTabController.of(context);
     assert(() {
       if (newController == null) {
@@ -460,14 +460,18 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
                   ),
                 ),
               )
-            : Row(
-                mainAxisAlignment: widget.alignment,
-                mainAxisSize: widget.alignmentSize,
-                children: List.generate(
-                  widget.tabs.length,
-                  (int index) => _buildButton(index, widget.tabs[index] as Tab),
-                ),
-              ),
+            : SizedBox(
+                key: _tabsContainerKey,
+                height: widget.preferredSize.height,
+                child: Row(
+                  mainAxisAlignment: widget.alignment,
+                  mainAxisSize: widget.alignmentSize,
+                  children: List.generate(
+                    widget.tabs.length,
+                    (int index) =>
+                        _buildButton(index, widget.tabs[index] as Tab),
+                  ),
+                )),
       ),
     );
   }
@@ -497,7 +501,9 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       _prevIndex = _currentIndex;
       _currentIndex = index;
     });
-    _scrollTo(index); // scroll TabBar if needed
+    if (widget.useScrollView) {
+      _scrollTo(index); // scroll TabBar if needed
+    }
     _triggerAnimation();
   }
 
