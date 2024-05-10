@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## [1.3.9] - 10 May 2024
+
+fix: elevation property
 
 ## [1.3.8] - 16 October 2023
 

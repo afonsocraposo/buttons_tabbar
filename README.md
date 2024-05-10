@@ -8,11 +8,11 @@ Buttons TabBar is an open-source Flutter package that provides a tabbar where ea
 
 ## Features
 
-✨ Each tab indicator is a toggle button  
-🎨 Customizable appearance and behavior  
-🖌️ Supports various styling options, including background color, border color, label style, icon color, and more  
-🚀 Smooth transition animations  
-📱 Works like a native TabBar  
+✨ Each tab indicator is a toggle button
+🎨 Customizable appearance and behavior
+🖌️ Supports various styling options, including background color, border color, label style, icon color, and more
+🚀 Smooth transition animations
+📱 Works like a native TabBar
 ⚙️ Simple and easy to use configuration with a wide range of parameters
 
 ## Installation
@@ -25,7 +25,7 @@ To use Buttons TabBar in your Flutter project, follow these steps:
 dependencies:
   flutter:
     sdk: flutter
-  buttons_tabbar: ^1.3.7+1
+  buttons_tabbar: ^1.3.9
 ```
 
 2. Run `flutter pub get` to install the package.

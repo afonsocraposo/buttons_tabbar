@@ -356,7 +356,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       key: _tabKeys[index],
       // padding for the buttons
       padding: margin,
-      child: TextButton(
+      child: ElevatedButton(
         onPressed: () {
           _controller?.animateTo(index);
           if (widget.onTap != null) widget.onTap!(index);
