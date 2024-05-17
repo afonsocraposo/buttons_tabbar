@@ -314,7 +314,8 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
               Colors.grey[300],
           boxShadow: widget.unselectedDecoration?.boxShadow,
           gradient: widget.unselectedDecoration?.gradient,
-          borderRadius: widget.unselectedDecoration?.borderRadius ?? BorderRadius.circular(widget.radius),
+          borderRadius: widget.unselectedDecoration?.borderRadius ??
+              BorderRadius.circular(widget.radius),
         ),
         BoxDecoration(
           color: widget.decoration?.color ??
@@ -322,7 +323,8 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
               Theme.of(context).colorScheme.secondary,
           boxShadow: widget.decoration?.boxShadow,
           gradient: widget.decoration?.gradient,
-          borderRadius: widget.decoration?.borderRadius ?? BorderRadius.circular(widget.radius),
+          borderRadius: widget.decoration?.borderRadius ??
+              BorderRadius.circular(widget.radius),
         ),
         animationValue);
 
@@ -351,7 +353,6 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       );
     }
 
-
     return Padding(
       key: _tabKeys[index],
       // padding for the buttons
@@ -362,24 +363,26 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
           if (widget.onTap != null) widget.onTap!(index);
         },
         style: ButtonStyle(
-            elevation: MaterialStateProperty.all(widget.elevation),
-            minimumSize: MaterialStateProperty.all(const Size(40, 40)),
-            padding: MaterialStateProperty.all(EdgeInsets.zero),
-            textStyle: MaterialStateProperty.all(textStyle),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                side: (widget.borderWidth == 0)
-                    ? BorderSide.none
-                    : BorderSide(
-                        color: borderColor ?? Colors.black,
-                        width: widget.borderWidth,
-                        style: BorderStyle.solid,
-                      ),
-                borderRadius: BorderRadius.circular(widget.radius),
-              ),
+          elevation: MaterialStateProperty.all(widget.elevation),
+          minimumSize: MaterialStateProperty.all(const Size(40, 40)),
+          padding: MaterialStateProperty.all(EdgeInsets.zero),
+          textStyle: MaterialStateProperty.all(textStyle),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              side: (widget.borderWidth == 0)
+                  ? BorderSide.none
+                  : BorderSide(
+                      color: borderColor ?? Colors.black,
+                      width: widget.borderWidth,
+                      style: BorderStyle.solid,
+                    ),
+              borderRadius: BorderRadius.circular(widget.radius),
             ),
-            overlayColor: MaterialStateProperty.all(widget.splashColor)),
+          ),
+          backgroundColor: MaterialStateProperty.all(Colors.transparent),
+          overlayColor: MaterialStateProperty.all(widget.splashColor),
+        ),
         child: Ink(
           decoration: boxDecoration,
           child: Container(
