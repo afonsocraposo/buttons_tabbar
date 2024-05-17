@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [1.3.10] - 17 May 2024
+
+fix: transparent button background
+
 ## [1.3.9] - 10 May 2024
 
 fix: elevation property

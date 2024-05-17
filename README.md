@@ -25,7 +25,7 @@ To use Buttons TabBar in your Flutter project, follow these steps:
 dependencies:
   flutter:
     sdk: flutter
-  buttons_tabbar: ^1.3.9
+  buttons_tabbar: ^1.3.10
 ```
 
 2. Run `flutter pub get` to install the package.
