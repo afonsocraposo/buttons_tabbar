@@ -379,6 +379,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
                 borderRadius: BorderRadius.circular(widget.radius),
               ),
             ),
+            backgroundColor: MaterialStateProperty.all(Colors.transparent),
             overlayColor: MaterialStateProperty.all(widget.splashColor)),
         child: Ink(
           decoration: boxDecoration,
