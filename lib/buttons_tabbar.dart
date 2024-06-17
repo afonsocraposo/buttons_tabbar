@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // Default values from the Flutter's TabBar.
 const double _kTabHeight = 46.0;
+const double _kTabWidth = 120.0;
 
 class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
   ButtonsTabBar({
@@ -26,7 +27,9 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.radius = 7.0,
     this.elevation = 0,
     this.height = _kTabHeight,
+    this.width = _kTabWidth,
     this.center = false,
+    this.contentCenter = false,
     this.onTap,
   }) : super(key: key) {
     assert(backgroundColor == null || decoration == null);
@@ -133,9 +136,13 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
   /// the height is computed by summing the material height, 46, and the vertical values
   /// for [contentPadding] and [buttonMargin].
   final double? height;
+  final double? width;
 
   /// Center the tab buttons
   final bool center;
+
+  /// Center the content of tab
+  final bool contentCenter;
 
   /// An optional callback that's called when the [TabBar] is tapped.
   ///
@@ -363,12 +370,12 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
           if (widget.onTap != null) widget.onTap!(index);
         },
         style: ButtonStyle(
-          elevation: MaterialStateProperty.all(widget.elevation),
-          minimumSize: MaterialStateProperty.all(const Size(40, 40)),
-          padding: MaterialStateProperty.all(EdgeInsets.zero),
-          textStyle: MaterialStateProperty.all(textStyle),
+          elevation: WidgetStateProperty.all(widget.elevation),
+          minimumSize: WidgetStateProperty.all(const Size(40, 40)),
+          padding: WidgetStateProperty.all(EdgeInsets.zero),
+          textStyle: WidgetStateProperty.all(textStyle),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          shape: MaterialStateProperty.all(
+          shape: WidgetStateProperty.all(
             RoundedRectangleBorder(
               side: (widget.borderWidth == 0)
                   ? BorderSide.none
@@ -380,8 +387,8 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
               borderRadius: BorderRadius.circular(widget.radius),
             ),
           ),
-          backgroundColor: MaterialStateProperty.all(Colors.transparent),
-          overlayColor: MaterialStateProperty.all(widget.splashColor),
+          backgroundColor: WidgetStateProperty.all(Colors.transparent),
+          overlayColor: WidgetStateProperty.all(widget.splashColor),
         ),
         child: Ink(
           decoration: boxDecoration,
@@ -389,6 +396,9 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
             padding: widget.contentPadding,
             alignment: Alignment.center,
             child: Row(
+              mainAxisAlignment: !widget.contentCenter
+                  ? MainAxisAlignment.start
+                  : MainAxisAlignment.center,
               children: <Widget>[
                 tab.icon != null
                     ? IconTheme.merge(
@@ -446,7 +456,9 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
               mainAxisSize: MainAxisSize.min,
               children: List.generate(
                 widget.tabs.length,
-                (int index) => _buildButton(index, widget.tabs[index] as Tab),
+                (int index) => SizedBox(
+                    width: widget.width,
+                    child: _buildButton(index, widget.tabs[index] as Tab)),
               ),
             ),
           ),
