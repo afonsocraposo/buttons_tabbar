@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [1.3.9] - 10 May 2024
+## [1.3.11] - 10 May 2024
 
 - Change MaterialStateProperty to WidgetStateProperty . (Compatibility with the last version of flutter )
 - Add the ability to change width attribute for change the tab width .
