@@ -83,7 +83,9 @@
 <li><span class="parameter" id="-param-radius"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">radius</span> = <span class="default-value">7.0</span>, </span></li>
 <li><span class="parameter" id="-param-elevation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a></span> <span class="parameter-name">elevation</span> = <span class="default-value">0</span>, </span></li>
 <li><span class="parameter" id="-param-height"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a>?</span> <span class="parameter-name">height</span> = <span class="default-value">_kTabHeight</span>, </span></li>
+<li><span class="parameter" id="-param-width"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/double-class.html">double</a>?</span> <span class="parameter-name">width</span> = <span class="default-value">_kTabWidth</span>, </span></li>
 <li><span class="parameter" id="-param-center"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">center</span> = <span class="default-value">false</span>, </span></li>
+<li><span class="parameter" id="-param-contentCenter"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">contentCenter</span> = <span class="default-value">false</span>, </span></li>
 <li><span class="parameter" id="-param-onTap"><span class="type-annotation">void</span> <span class="parameter-name">onTap</span>(<ol class="parameter-list"><li><span class="parameter" id="param-"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span></span></li>
 </ol>
 )?}</span></li>
@@ -118,7 +120,9 @@
   this.radius = 7.0,
   this.elevation = 0,
   this.height = _kTabHeight,
+  this.width = _kTabWidth,
   this.center = false,
+  this.contentCenter = false,
   this.onTap,
 }) : super(key: key) {
   assert(backgroundColor == null || decoration == null);
@@ -157,7 +161,7 @@
 <footer>
   <span class="no-break">
     buttons_tabbar
-      1.3.10
+      1.3.11
   </span>
 
   
