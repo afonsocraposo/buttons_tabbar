@@ -1,5 +1,6 @@
 # Buttons TabBar
 
+[![Publish](https://github.com/afonsocraposo/buttons_tabbar/actions/workflows/release.yml/badge.svg)](https://github.com/afonsocraposo/buttons_tabbar/actions/workflows/release.yml)
 [![Pub](https://img.shields.io/pub/v/buttons_tabbar.svg)](https://pub.dev/packages/buttons_tabbar)
 
 Buttons TabBar is an open-source Flutter package that provides a tabbar where each tab indicator is a toggle button. It allows you to create interactive and customizable tab bars for your Flutter applications.
