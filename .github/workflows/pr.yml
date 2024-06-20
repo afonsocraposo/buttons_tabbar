@@ -32,7 +32,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Publish dry run
-        uses: afonsocraposo/actions-flutter-pub-publisher@v1.0.0
+        uses: afonsocraposo/actions-flutter-pub-publisher@v1.1.0
         with:
           skip_test: true
           dry-run: true
