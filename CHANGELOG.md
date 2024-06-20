@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [1.3.11] - 10 May 2024
+
+- Change MaterialStateProperty to WidgetStateProperty . (Compatibility with the last version of flutter )
+- Add the ability to change width attribute for change the tab width .
+- Add the ability to make the content of the tab in the center .
+
 ## [1.3.10] - 17 May 2024
 
 fix: transparent button background
