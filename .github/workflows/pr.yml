@@ -25,3 +25,14 @@ jobs:
     - name: Check version
       run: |
         python .github/workflows/check_version.py
+
+  dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Dry run
+        uses: sakebook/actions-flutter-pub-publisher@v1.3.1
+        with:
+          skip_test: true
+          dry-run: true
