@@ -1,4 +1,4 @@
-name: Release
+name: Publish
 
 on:
   push:
@@ -16,3 +16,4 @@ jobs:
         with:
           credential: ${{ secrets.CREDENTIAL_JSON }}
           skip_test: true
+
