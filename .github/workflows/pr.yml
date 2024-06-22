@@ -34,5 +34,6 @@ jobs:
       - name: Publish dry run
         uses: afonsocraposo/actions-flutter-pub-publisher@v1.1.0
         with:
+          credential: ${{ secrets.CREDENTIAL_JSON }}
           skip_test: true
           dry_run: true
