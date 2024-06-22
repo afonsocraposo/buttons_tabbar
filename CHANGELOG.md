@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## [1.3.11] - 10 May 2024
+## [1.3.12] - 22 June 2024
+
+- fix: set default tab width as `null` so it fits its content
+
+## [1.3.11] - 20 June 2024
 
 - Change MaterialStateProperty to WidgetStateProperty . (Compatibility with the last version of flutter )
 - Add the ability to change width attribute for change the tab width .

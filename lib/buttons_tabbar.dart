@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 // Default values from the Flutter's TabBar.
 const double _kTabHeight = 46.0;
-const double _kTabWidth = 120.0;
 
 class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
   ButtonsTabBar({
@@ -27,7 +26,7 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.radius = 7.0,
     this.elevation = 0,
     this.height = _kTabHeight,
-    this.width = _kTabWidth,
+    this.width = null,
     this.center = false,
     this.contentCenter = false,
     this.onTap,
