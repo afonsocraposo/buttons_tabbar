@@ -35,4 +35,4 @@ jobs:
         uses: afonsocraposo/actions-flutter-pub-publisher@v1.1.0
         with:
           skip_test: true
-          dry-run: true
+          dry_run: true
