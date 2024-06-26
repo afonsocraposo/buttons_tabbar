@@ -370,7 +370,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
         },
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(widget.elevation),
-          minimumSize: MaterialStateProperty.all(const Size(40, 40)),
+          minimumSize: MaterialStateProperty.all (const Size(40, 40)),
           padding: MaterialStateProperty.all(EdgeInsets.zero),
           textStyle: MaterialStateProperty.all(textStyle),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
