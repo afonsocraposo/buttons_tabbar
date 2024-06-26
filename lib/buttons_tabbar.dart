@@ -369,12 +369,12 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
           if (widget.onTap != null) widget.onTap!(index);
         },
         style: ButtonStyle(
-          elevation: WidgetStateProperty.all(widget.elevation),
-          minimumSize: WidgetStateProperty.all(const Size(40, 40)),
-          padding: WidgetStateProperty.all(EdgeInsets.zero),
-          textStyle: WidgetStateProperty.all(textStyle),
+          elevation: MaterialStateProperty.all(widget.elevation),
+          minimumSize: MaterialStateProperty.all(const Size(40, 40)),
+          padding: MaterialStateProperty.all(EdgeInsets.zero),
+          textStyle: MaterialStateProperty.all(textStyle),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          shape: WidgetStateProperty.all(
+          shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               side: (widget.borderWidth == 0)
                   ? BorderSide.none
@@ -386,8 +386,8 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
               borderRadius: BorderRadius.circular(widget.radius),
             ),
           ),
-          backgroundColor: WidgetStateProperty.all(Colors.transparent),
-          overlayColor: WidgetStateProperty.all(widget.splashColor),
+          backgroundColor: MaterialStateProperty.all(Colors.transparent),
+          overlayColor: MaterialStateProperty.all(widget.splashColor),
         ),
         child: Ink(
           decoration: boxDecoration,
