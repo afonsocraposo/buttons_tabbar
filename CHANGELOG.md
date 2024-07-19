@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [1.3.13] - 22 June 2024
+
+- chore: set Flutter `3.22.0` as minimum sdk version
+
 ## [1.3.12] - 22 June 2024
 
 - fix: set default tab width as `null` so it fits its content
