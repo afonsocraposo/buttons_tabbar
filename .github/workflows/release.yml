@@ -7,13 +7,19 @@ on:
 
 jobs:
   publish:
+    permissions:
+      id-token: write # Required for authentication using OIDC
+      contents: read
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Publish to pub.dev
-        uses: afonsocraposo/actions-flutter-pub-publisher@v1.1.0
-        with:
-          credential: ${{ secrets.CREDENTIAL_JSON }}
-          skip_test: true
+      - uses: actions/checkout@v4
 
+      # Setup Flutter SDK and automated pub.dev credentials
+      - uses: flutter-actions/setup-flutter@v3
+      - uses: flutter-actions/setup-pubdev-credentials@v1
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Publish
+        run: flutter pub publish --force
