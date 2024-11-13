@@ -272,6 +272,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     }
     _controller = null;
     _scrollController.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 

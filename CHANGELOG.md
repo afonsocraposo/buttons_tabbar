@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [1.3.14] - 13 November 2024
+
+- fix: `animationController` was still active after `buttons_tabbar` was disposed
+
 ## [1.3.13] - 22 June 2024
 
 - chore: set Flutter `3.22.0` as minimum sdk version
