@@ -228,6 +228,9 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     _controller?.animation!.addListener(_handleTabAnimation);
     _controller?.addListener(_handleController);
     _currentIndex = _controller!.index;
+    Future.delayed(Duration.zero, () {
+        _scrollTo(_currentIndex);
+    });
   }
 
   // If the TabBar is rebuilt with a new tab controller, the caller should
