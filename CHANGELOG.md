@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [1.3.15] - 13 November 2024
+
+- fix: animate to off screen index on init #68
+
 ## [1.3.14] - 13 November 2024
 
 - fix: `animationController` was still active after `buttons_tabbar` was disposed
