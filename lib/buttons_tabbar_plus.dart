@@ -370,6 +370,7 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       child: ElevatedButton(
         onPressed: () {
           _controller?.animateTo(index);
+          _setCurrentIndex(index);
           if (widget.onTap != null) widget.onTap!(index);
         },
         style: ButtonStyle(

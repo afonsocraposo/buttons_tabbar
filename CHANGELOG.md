@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [1.3.17] - 01 November 2025
+
+- fix: update current index when button is tap
+
 ## [1.3.16] - 01 November 2025
 
 - fix: Flutter 3.35 `RenderBox in type cast`
