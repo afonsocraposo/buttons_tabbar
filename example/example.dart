@@ -1,4 +1,4 @@
-import 'package:buttons_tabbar_plus/buttons_tabbar_plus.dart';
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
 }
 
 class Example extends StatefulWidget {
-  const Example({Key? key}) : super(key: key);
+  Example({Key? key}) : super(key: key);
 
   @override
   _ExampleState createState() => _ExampleState();

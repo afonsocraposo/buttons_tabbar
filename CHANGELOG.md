@@ -1,14 +1,5 @@
 # CHANGELOG
 
-## [1.3.17] - 01 November 2025
-
-- fix: update current index when button is tap
-
-## [1.3.16] - 01 November 2025
-
-- fix: Flutter 3.35 `RenderBox in type cast`
-This package was created to continue the project originally made by "afonsocraposo/buttons_tabbar" because he no longer updated the package.
-
 ## [1.3.15] - 13 November 2024
 
 - fix: animate to off screen index on init #68
