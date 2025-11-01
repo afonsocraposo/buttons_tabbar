@@ -26,7 +26,7 @@ class ButtonsTabBar extends StatefulWidget implements PreferredSizeWidget {
     this.radius = 7.0,
     this.elevation = 0,
     this.height = _kTabHeight,
-    this.width,
+    this.width = null,
     this.center = false,
     this.contentCenter = false,
     this.onTap,
@@ -370,7 +370,6 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       child: ElevatedButton(
         onPressed: () {
           _controller?.animateTo(index);
-          _setCurrentIndex(index);
           if (widget.onTap != null) widget.onTap!(index);
         },
         style: ButtonStyle(
@@ -531,21 +530,9 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
     // if the button is to the left of the middle
     if (offset < 0) {
       // get the first button
-      
-      //Remove devido ao flutter 3.35
-      /*renderBox = (_textLTR ? _tabKeys.first : _tabKeys.last)
+      renderBox = (_textLTR ? _tabKeys.first : _tabKeys.last)
           .currentContext
-          ?.findRenderObject() as RenderBox;*/
-
-      final context = (_textLTR ? _tabKeys.last : _tabKeys.first).currentContext;
-      if (context != null) {
-        renderBox = context.findRenderObject() as RenderBox;
-      } else {
-        // fallback, por exemplo:
-        return;
-      }
-
-
+          ?.findRenderObject() as RenderBox;
       //// get the position of the first button of the TabBar
       position = renderBox.localToGlobal(tabsContainerOffset).dx;
 
@@ -553,21 +540,11 @@ class _ButtonsTabBarState extends State<ButtonsTabBar>
       if (!widget.center && position > offset) offset = position;
     } else {
       // if the button is to the right of the middle
-      
-      //Remove devido ao flutter 3.35
+
       // get the last button
-      /*renderBox = (_textLTR ? _tabKeys.last : _tabKeys.first)
+      renderBox = (_textLTR ? _tabKeys.last : _tabKeys.first)
           .currentContext
-          ?.findRenderObject() as RenderBox;*/
-
-      final context = (_textLTR ? _tabKeys.last : _tabKeys.first).currentContext;
-      if (context != null) {
-        renderBox = context.findRenderObject() as RenderBox;
-      } else {
-        // fallback, por exemplo:
-        return;
-      }  
-
+          ?.findRenderObject() as RenderBox;
       // get its position
       position = renderBox.localToGlobal(tabsContainerOffset).dx;
       // and size
