@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
 }
 
 class Example extends StatefulWidget {
-  Example({Key? key}) : super(key: key);
+  const Example({Key? key}) : super(key: key);
 
   @override
   _ExampleState createState() => _ExampleState();
