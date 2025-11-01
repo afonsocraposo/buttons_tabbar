@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [1.3.16] - 01 November 2025
+
+- fix: Flutter 3.35 `RenderBox in type cast`
+
 ## [1.3.15] - 13 November 2024
 
 - fix: animate to off screen index on init #68
