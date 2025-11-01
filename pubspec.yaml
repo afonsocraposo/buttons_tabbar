@@ -1,7 +1,7 @@
 name: buttons_tabbar_plus
 description: A Flutter package that implements a TabBar where each label is a toggle button.
 version: 1.3.16
-homepage: 
+homepage: https://github.com/Alyssonpp/buttons_tabbar_plus
 repository: https://github.com/Alyssonpp/buttons_tabbar_plus
 
 environment:
