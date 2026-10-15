@@ -26,8 +26,11 @@ To use Buttons TabBar in your Flutter project, follow these steps:
 dependencies:
   flutter:
     sdk: flutter
-  buttons_tabbar: ^1.3.14
+  material_ui: ^1.7.0
+  buttons_tabbar: ^2.0.0
 ```
+
+> Version 2 is built on [`material_ui`](https://pub.dev/packages/material_ui) and requires Flutter 3.47+. If your app still uses `package:flutter/material.dart`, stay on `buttons_tabbar: ^1.3.15`.
 
 2. Run `flutter pub get` to install the package.
 
@@ -37,6 +40,7 @@ Import the package in your Dart file and customize the tab bar according to your
 
 ```dart
 import 'package:buttons_tabbar/buttons_tabbar.dart';
+import 'package:material_ui/material_ui.dart';
 
 DefaultTabController(
   length: ...,

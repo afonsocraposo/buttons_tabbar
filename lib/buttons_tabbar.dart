@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Default values from the Flutter's TabBar.
 const double _kTabHeight = 46.0;

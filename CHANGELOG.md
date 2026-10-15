@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [2.0.0] - 15 October 2026
+
+- **BREAKING**: migrate from `package:flutter/material.dart` to the standalone [`material_ui`](https://pub.dev/packages/material_ui) package. `ButtonsTabBar` now expects `TabController`/`DefaultTabController` from `material_ui`.
+- **BREAKING**: minimum Flutter version is now `3.47.0` (Dart `3.13`).
+- If your app still uses `package:flutter/material.dart`, stay on `^1.3.15`.
+
 ## [1.3.15] - 13 November 2024
 
 - fix: animate to off screen index on init #68
