@@ -1,5 +1,5 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() => runApp(MyApp());
 
